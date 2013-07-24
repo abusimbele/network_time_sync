@@ -6,13 +6,15 @@ Created on 24.07.2013
 #Describes the environment for the nodes
 
 from Space import Space
+from pylab import *
 
 class Node_environment(object):
 
     #Geometric variables of the environment
-    length  =   0
-    width   =   0
-    grid    =   []
+    length      =   0
+    width       =   0
+    grid        =   []
+    env_objects =   []
 
 
     #Constructor
@@ -37,6 +39,21 @@ class Node_environment(object):
             
     def set_grid_position_value(self,coordinate,environmental_object):
         self.grid[coordinate[0]][coordinate[1]]=environmental_object
+        
+        
+    def set_env_object(self,coordinate,environmenatal_object):  
+        self.env_objects.append([coordinate,environmenatal_object])  
+        
+    def show_environment(self):
+        axis([0, self.width, 0, self.length])
+        for i in self.env_objects:
+            plot(i[0][0],i[0][1],'+')
+        
+        show()
+        
+
+        
+        
 
            
         

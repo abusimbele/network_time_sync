@@ -17,7 +17,7 @@ class Agitator(object):
         
 
     def random_distriution(self):
-#         print "Not implemented yet"
+        print "Not implemented yet"
         
         
         
