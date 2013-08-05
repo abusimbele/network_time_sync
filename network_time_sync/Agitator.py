@@ -3,7 +3,7 @@ Created on 24.07.2013
 
 @author: Sascha Friedrich
 '''
-from Node_environment import Node_environment
+from env.Node_environment import *
 
 
 class Agitator(object):
@@ -17,13 +17,16 @@ class Agitator(object):
         
 
     def random_distriution(self):
-        print "Not implemented yet"
-        
-        
+        pass
+            
         
     def set_node_into_environment(self,node_id, coordinate):
         env=Node_environment
         env.set_grid_position_value(coordinate, node_id)
+        
+        
+        
+    
         
         
         
