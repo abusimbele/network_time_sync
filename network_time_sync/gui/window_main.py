@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Work\Desktop\window_main.ui'
 #
-# Created: Mon Aug  5 11:59:27 2013
+# Created: Mon Aug  5 19:27:20 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -18,6 +18,14 @@ class Ui_MainWindow(object):
         self.widget_simulation_window = QtGui.QWidget(self.centralwidget)
         self.widget_simulation_window.setGeometry(QtCore.QRect(20, 20, 571, 411))
         self.widget_simulation_window.setObjectName("widget_simulation_window")
+#         self.pushButton_robot_1 = QtGui.QPushButton(self.widget_simulation_window)
+#         self.pushButton_robot_1.setGeometry(QtCore.QRect(270, 190, 41, 41))
+#         self.pushButton_robot_1.setText("")
+#         icon = QtGui.QIcon()
+#         icon.addPixmap(QtGui.QPixmap(":/images/robot_beacon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+#         self.pushButton_robot_1.setIcon(icon)
+#         self.pushButton_robot_1.setIconSize(QtCore.QSize(30, 30))
+#         self.pushButton_robot_1.setObjectName("pushButton_robot_1")
         self.formLayoutWidget = QtGui.QWidget(self.centralwidget)
         self.formLayoutWidget.setGeometry(QtCore.QRect(610, 20, 160, 101))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
@@ -186,3 +194,4 @@ class Ui_MainWindow(object):
         self.actionVersion.setText(QtGui.QApplication.translate("MainWindow", "Version", None, QtGui.QApplication.UnicodeUTF8))
         self.actionINIT.setText(QtGui.QApplication.translate("MainWindow", "INIT", None, QtGui.QApplication.UnicodeUTF8))
 
+import images.robots_rc

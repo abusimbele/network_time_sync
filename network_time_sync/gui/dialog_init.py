@@ -77,9 +77,11 @@ class Ui_Dialog(object):
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_txt_width)
         self.spinBox_env_width = QtGui.QSpinBox(self.widget)
         self.spinBox_env_width.setObjectName("spinBox_env_width")
+        self.spinBox_env_width.setRange(0,300)
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.spinBox_env_width)
         self.spinBox_env_length = QtGui.QSpinBox(self.widget)
         self.spinBox_env_length.setObjectName("spinBox_env_length")
+        self.spinBox_env_length.setRange(0,300)
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.spinBox_env_length)
         self.verticalLayout.addLayout(self.formLayout)
 

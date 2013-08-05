@@ -23,6 +23,29 @@
       <height>411</height>
      </rect>
     </property>
+    <widget class="QPushButton" name="pushButton_robot_1">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>190</y>
+       <width>41</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset resource="robots.qrc">
+       <normaloff>:/images/robot_beacon.png</normaloff>:/images/robot_beacon.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
@@ -311,6 +334,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="robots.qrc"/>
+ </resources>
  <connections/>
 </ui>

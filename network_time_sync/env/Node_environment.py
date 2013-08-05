@@ -29,9 +29,15 @@ class Node_environment(object):
         
         
     def set_env_object(self,environmental_object):  
-        self.env_objects.append(environmental_object)  
+        self.env_objects.append(environmental_object)
         
-    #def show_environment(self):
+        
+        
+        
+        
+          
+        
+    
         
         
         

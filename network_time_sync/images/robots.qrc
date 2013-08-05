@@ -1,0 +1,7 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+<file>images/robot_beacon.png</file>
+<file>images/robot_active.png</file>
+<file>images/robot_passive.png</file>
+</qresource>
+</RCC>

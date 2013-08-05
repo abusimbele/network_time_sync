@@ -25,7 +25,7 @@ from Network_time_sync import Network_time_sync
 
 
 
-MAX_TRANSMITTION_RANGE=8.0
+MAX_TRANSMITTION_RANGE=100.0
 
 
 
@@ -78,15 +78,55 @@ def init_env():
 #set nodes to the envornment
     
     #set beacons
+    i=0
     for nb in range(dialog_init.spinBox_nb_beacons.value()):
-        node = Node(nb,0,True,MAX_TRANSMITTION_RANGE,(random.randint(0,env_width),random.randint(0,env_length)),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy))
+        node_id=nb
+        x=random.randint(0,env_width)
+        y=random.randint(0,env_length)
+        
+        
+        pushButton_robot = QtGui.QPushButton(window.widget_simulation_window)
+        pushButton_robot.setGeometry(QtCore.QRect(x, y, 60, 41))
+        pushButton_robot.setText(str(node_id))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/images/robot_beacon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        pushButton_robot.setIcon(icon)
+        pushButton_robot.setIconSize(QtCore.QSize(30, 30))
+        pushButton_robot.setObjectName("pushButton_robot_"+str(i))
+        pushButton_robot.setVisible(True)
+
+        
+        node = Node(node_id,0,True,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy),pushButton_robot)
         env.set_env_object(node)
+        i=i+1
     
     
     #set other nodes
+    
     for nb in range(dialog_init.spinBox_nb_nodes.value()):
-        node = Node(nb+dialog_init.spinBox_nb_beacons.value(),-1,False,MAX_TRANSMITTION_RANGE,(random.randint(0,env_width),random.randint(0,env_length)),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy))
+        node_id=nb+dialog_init.spinBox_nb_beacons.value()
+        
+        x=random.randint(0,env_width)
+        y=random.randint(0,env_length)
+        
+        pushButton_robot = QtGui.QPushButton(window.widget_simulation_window)
+        pushButton_robot.setGeometry(QtCore.QRect(x, y, 60, 41))
+        pushButton_robot.setText(str(node_id))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/images/robot_passive.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        pushButton_robot.setIcon(icon)
+        pushButton_robot.setIconSize(QtCore.QSize(30, 30))
+        pushButton_robot.setObjectName("pushButton_robot_"+str(i))
+        pushButton_robot.setVisible(True)
+        
+        node = Node(node_id,-1,False,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy),pushButton_robot)
         env.set_env_object(node)
+        i=i+1
+
+ 
+ 
+    
+    
         
         
 #################################################################
@@ -98,6 +138,14 @@ def init_env():
         
     
     sync_algorithm=Network_time_sync(window,dialog_init,env)    
+    
+    
+
+
+    
+    
+    
+    
     
     #Debugging
     print(sync_algorithm.env.env_objects)
@@ -126,6 +174,12 @@ window.actionINIT.triggered.connect(dialog_init.show)
 dialog_init.buttonBox_dialog_init.accepted.connect(init_env)
 
 window.pushButton_start_simulation.clicked.connect(sync_algorithm.initial_layer_creation)
+
+
+
+
+
+
 
 #######################################################################
 

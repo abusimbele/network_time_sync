@@ -42,16 +42,6 @@ class Network_time_sync(object):
     
     def initial_layer_creation(self):
 
-
-        print("WUFF") 
-        #####
-        #AT THE MOMENT DISTANCES NOT EFFECTING ORDERING!!!!!! OTHER VERSION TO DO, TOO!
-        #####
-        
-        
-        
-#         #DELETE
-#         env=Node_environment()
     
     
         #initial node for start of the algorithm
