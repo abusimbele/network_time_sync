@@ -21,13 +21,19 @@ import random
 
 from Agitator import Agitator
 from gui import dialog_init
-from tkinter.dialog import DIALOG_ICON
+from Network_time_sync import Network_time_sync
+
+
+
+MAX_TRANSMITTION_RANGE=8.0
 
 
 
 
 #SET SEED
 random.seed(1)
+
+
 
 
 
@@ -52,9 +58,12 @@ class MyDialog(QtGui.QDialog, Ui_Dialog):
 
 app = QtGui.QApplication(sys.argv)
 window = MyApplication()
-window.show()
-
 dialog_init = MyDialog()
+
+
+env=Node_environment(0,0)
+sync_algorithm=Network_time_sync(window,dialog_init,env)
+
 
 
 #Action_methods:
@@ -70,13 +79,13 @@ def init_env():
     
     #set beacons
     for nb in range(dialog_init.spinBox_nb_beacons.value()):
-        node = Node(nb,-1,True,(random.randint(0,env_width),random.randint(0,env_length)),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy))
+        node = Node(nb,0,True,MAX_TRANSMITTION_RANGE,(random.randint(0,env_width),random.randint(0,env_length)),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy))
         env.set_env_object(node)
     
     
     #set other nodes
     for nb in range(dialog_init.spinBox_nb_nodes.value()):
-        node = Node(nb+dialog_init.spinBox_nb_beacons.value(),-1,False,(random.randint(0,env_width),random.randint(0,env_length)),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy))
+        node = Node(nb+dialog_init.spinBox_nb_beacons.value(),-1,False,MAX_TRANSMITTION_RANGE,(random.randint(0,env_width),random.randint(0,env_length)),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy))
         env.set_env_object(node)
         
         
@@ -88,7 +97,22 @@ def init_env():
         print(i,i.mac_id,i.layer,i.coordinates,i.is_beacon)
         
     
+    sync_algorithm=Network_time_sync(window,dialog_init,env)    
     
+    #Debugging
+    print(sync_algorithm.env.env_objects)
+    
+    
+       
+    
+
+    
+                    
+def poo():
+    print("POO")
+
+
+
 
 
 #######################################################################
@@ -101,12 +125,13 @@ window.actionINIT.triggered.connect(dialog_init.show)
 #INIT-Dialog:
 dialog_init.buttonBox_dialog_init.accepted.connect(init_env)
 
+window.pushButton_start_simulation.clicked.connect(sync_algorithm.initial_layer_creation)
 
 #######################################################################
 
 
 
-
+window.show()
 sys.exit(app.exec_())
 
 
