@@ -22,9 +22,8 @@ class Network_time_sync(object):
         x=[]
         y=[]
         x.append(base_node.coordinates[0])
-        x.append(node.coordinates[0])
-        
-        y.append(base_node.coordinates[1])
+        x.append(base_node.coordinates[1])
+        y.append(node.coordinates[0])
         y.append(node.coordinates[1])
 
         
@@ -64,6 +63,7 @@ class Network_time_sync(object):
                 for node in self.passive_node_list:                
                     #euclidean distance    
                     print("node: ",node.mac_id )
+                    print(base_node,node)
                     distance = self.euclidean(base_node,node)
                     
                     print("distance",distance)

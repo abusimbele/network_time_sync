@@ -25,7 +25,7 @@ from Network_time_sync import Network_time_sync
 
 
 
-MAX_TRANSMITTION_RANGE=100.0
+MAX_TRANSMITTION_RANGE=200.0
 
 
 
@@ -66,6 +66,25 @@ sync_algorithm=Network_time_sync(window,dialog_init,env)
 
 
 
+
+#SLOT
+def view_node_parameter(node):
+
+    window.label_x.setText(node.coordinates[0])
+    window.label_y.setText(node.coordinates[1])
+    window.label_layer.setText(node.layer)
+    window.label_v_x.setText(node.velocity_vector[0])
+    window.label_v_y.setText(node.velocity_vector[1])
+    
+    if(node.is_beacon):
+        window.checkBox_beacon.setChecked(True)
+    else:
+        window.checkBox_beacon.setChecked(False)
+    
+
+
+
+
 #Action_methods:
 #INIT the environment trough the dialog choices
 def init_env():
@@ -94,10 +113,20 @@ def init_env():
         pushButton_robot.setIconSize(QtCore.QSize(30, 30))
         pushButton_robot.setObjectName("pushButton_robot_"+str(i))
         pushButton_robot.setVisible(True)
+        
+        
+        
 
         
         node = Node(node_id,0,True,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy),pushButton_robot)
         env.set_env_object(node)
+        
+        
+        
+        #SIGNAL_SLOTS:
+        #pushButton_robot.clicked.connect()
+        
+        
         i=i+1
     
     
