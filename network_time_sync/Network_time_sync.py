@@ -44,7 +44,8 @@ class Network_time_sync(object):
     
     
         #initial node for start of the algorithm
-        for node in self.env.env_objects:
+        for id in self.env.env_objects:
+            node=self.env.env_objects[id]
             if node.is_beacon:
                 self.active_node_list.append((0,node))
             else:
@@ -77,8 +78,8 @@ class Network_time_sync(object):
                 self.active_node_list.sort(key=lambda tup: tup[0],reverse=True)
                 
                 #Degugging
-        for i in self.env.env_objects:
-            print(i,i.mac_id,i.layer,i.coordinates,i.is_beacon,i.gateway)
+        for id in self.env.env_objects:
+            print(self.env.env_objects[id],self.env.env_objects[id].mac_id,self.env.env_objects[id].layer,self.env.env_objects[id].coordinates,self.env.env_objects[id].is_beacon,self.env.env_objects[id].gateway)
                 
                         
                 

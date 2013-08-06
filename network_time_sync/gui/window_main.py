@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Work\Desktop\window_main.ui'
 #
-# Created: Mon Aug  5 19:27:20 2013
+# Created: Tue Aug  6 12:28:58 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
 #         self.pushButton_robot_1.setIconSize(QtCore.QSize(30, 30))
 #         self.pushButton_robot_1.setObjectName("pushButton_robot_1")
         self.formLayoutWidget = QtGui.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(610, 20, 160, 101))
+        self.formLayoutWidget.setGeometry(QtCore.QRect(610, 20, 160, 133))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtGui.QFormLayout(self.formLayoutWidget)
         self.formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
@@ -47,19 +47,25 @@ class Ui_MainWindow(object):
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.label_layer)
         self.label_txt_x = QtGui.QLabel(self.formLayoutWidget)
         self.label_txt_x.setObjectName("label_txt_x")
-        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_txt_x)
+        self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_txt_x)
         self.label_x = QtGui.QLabel(self.formLayoutWidget)
         self.label_x.setObjectName("label_x")
-        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.label_x)
+        self.formLayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.label_x)
         self.label_txt_y = QtGui.QLabel(self.formLayoutWidget)
         self.label_txt_y.setObjectName("label_txt_y")
-        self.formLayout.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_txt_y)
+        self.formLayout.setWidget(4, QtGui.QFormLayout.LabelRole, self.label_txt_y)
         self.label_y = QtGui.QLabel(self.formLayoutWidget)
         self.label_y.setObjectName("label_y")
-        self.formLayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.label_y)
+        self.formLayout.setWidget(4, QtGui.QFormLayout.FieldRole, self.label_y)
+        self.label_txt_gateway = QtGui.QLabel(self.formLayoutWidget)
+        self.label_txt_gateway.setObjectName("label_txt_gateway")
+        self.formLayout.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_txt_gateway)
+        self.label_gateway = QtGui.QLabel(self.formLayoutWidget)
+        self.label_gateway.setObjectName("label_gateway")
+        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.label_gateway)
         self.checkBox_beacon = QtGui.QCheckBox(self.formLayoutWidget)
         self.checkBox_beacon.setObjectName("checkBox_beacon")
-        self.formLayout.setWidget(4, QtGui.QFormLayout.LabelRole, self.checkBox_beacon)
+        self.formLayout.setWidget(6, QtGui.QFormLayout.LabelRole, self.checkBox_beacon)
         self.horizontalLayoutWidget = QtGui.QWidget(self.centralwidget)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 470, 751, 80))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -98,7 +104,7 @@ class Ui_MainWindow(object):
         self.pushButton_crash_node.setObjectName("pushButton_crash_node")
         self.verticalLayout.addWidget(self.pushButton_crash_node)
         self.listView_neighbours = QtGui.QListView(self.centralwidget)
-        self.listView_neighbours.setGeometry(QtCore.QRect(610, 130, 161, 91))
+        self.listView_neighbours.setGeometry(QtCore.QRect(610, 150, 161, 71))
         self.listView_neighbours.setObjectName("listView_neighbours")
         self.formLayoutWidget_2 = QtGui.QWidget(self.centralwidget)
         self.formLayoutWidget_2.setGeometry(QtCore.QRect(610, 230, 160, 53))
@@ -174,6 +180,8 @@ class Ui_MainWindow(object):
         self.label_x.setText(QtGui.QApplication.translate("MainWindow", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
         self.label_txt_y.setText(QtGui.QApplication.translate("MainWindow", "y:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_y.setText(QtGui.QApplication.translate("MainWindow", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_txt_gateway.setText(QtGui.QApplication.translate("MainWindow", "gateway:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_gateway.setText(QtGui.QApplication.translate("MainWindow", "TextLabel", None, QtGui.QApplication.UnicodeUTF8))
         self.checkBox_beacon.setText(QtGui.QApplication.translate("MainWindow", "beacon", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_start_simulation.setText(QtGui.QApplication.translate("MainWindow", "start simulation", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_pause_simulation.setText(QtGui.QApplication.translate("MainWindow", "pause", None, QtGui.QApplication.UnicodeUTF8))

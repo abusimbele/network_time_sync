@@ -53,7 +53,7 @@
       <x>610</x>
       <y>20</y>
       <width>160</width>
-      <height>101</height>
+      <height>133</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
@@ -88,35 +88,49 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="label_txt_x">
        <property name="text">
         <string>x:</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="QLabel" name="label_x">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="label_txt_y">
        <property name="text">
         <string>y:</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <widget class="QLabel" name="label_y">
        <property name="text">
         <string>TextLabel</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_txt_gateway">
+       <property name="text">
+        <string>Gateway:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="label_gateway">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
       <widget class="QCheckBox" name="checkBox_beacon">
        <property name="text">
         <string>beacon</string>
@@ -209,9 +223,9 @@
     <property name="geometry">
      <rect>
       <x>610</x>
-      <y>130</y>
+      <y>150</y>
       <width>161</width>
-      <height>91</height>
+      <height>71</height>
      </rect>
     </property>
    </widget>

@@ -67,19 +67,12 @@ sync_algorithm=Network_time_sync(window,dialog_init,env)
 
 
 
-#SLOT
-def view_node_parameter(node):
+ 
 
-    window.label_x.setText(node.coordinates[0])
-    window.label_y.setText(node.coordinates[1])
-    window.label_layer.setText(node.layer)
-    window.label_v_x.setText(node.velocity_vector[0])
-    window.label_v_y.setText(node.velocity_vector[1])
-    
-    if(node.is_beacon):
-        window.checkBox_beacon.setChecked(True)
-    else:
-        window.checkBox_beacon.setChecked(False)
+
+
+
+     
     
 
 
@@ -91,6 +84,15 @@ def init_env():
     env_length=dialog_init.spinBox_env_length.value()
     env_width=dialog_init.spinBox_env_width.value()
     env = Node_environment(env_length,env_width)
+    
+    
+    
+    
+###################################
+#TO CHANGE ERROR_PRONE CODE ->BEGIN
+###################################
+    
+    
     
     
 #############################################################
@@ -111,22 +113,27 @@ def init_env():
         icon.addPixmap(QtGui.QPixmap(":/images/robot_beacon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         pushButton_robot.setIcon(icon)
         pushButton_robot.setIconSize(QtCore.QSize(30, 30))
-        pushButton_robot.setObjectName("pushButton_robot_"+str(i))
         pushButton_robot.setVisible(True)
         
         
         
 
         
-        node = Node(node_id,0,True,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy),pushButton_robot)
+        node = Node(node_id,0,True,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx.value(),dialog_init.doubleSpinBox_vy.value()),pushButton_robot)
         env.set_env_object(node)
         
+        #after env-placement, to get the wright ENV_ID
+        pushButton_robot.setObjectName(str(node.env_id))
         
-        
+        #register window-ref
+        node.set_window_ref(window)
+        node.set_env_ref(env)
+
         #SIGNAL_SLOTS:
-        #pushButton_robot.clicked.connect()
+        pushButton_robot.clicked.connect(node.view_parameter)
+        pushButton_robot.clicked.connect(node.view_special_parameter)
         
-        
+       
         i=i+1
     
     
@@ -148,12 +155,27 @@ def init_env():
         pushButton_robot.setObjectName("pushButton_robot_"+str(i))
         pushButton_robot.setVisible(True)
         
-        node = Node(node_id,-1,False,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx,dialog_init.doubleSpinBox_vy),pushButton_robot)
+        node = Node(node_id,-1,False,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx.value(),dialog_init.doubleSpinBox_vy.value()),pushButton_robot)
         env.set_env_object(node)
+        
+        #after env-placement, to get the wright ENV_ID
+        pushButton_robot.setObjectName(str(node.env_id))
+        
+        #register window-ref
+        node.set_window_ref(window)
+        node.set_env_ref(env)
+        
+        
+        
+        pushButton_robot.clicked.connect(node.view_parameter)
+        pushButton_robot.clicked.connect(node.view_special_parameter)
+        
         i=i+1
 
  
- 
+ ######################################
+ #ERROR_PRONE CODE -> END
+ ######################################
     
     
         
@@ -162,8 +184,8 @@ def init_env():
 
 
     #Debugging
-    for i in env.env_objects:
-        print(i,i.mac_id,i.layer,i.coordinates,i.is_beacon)
+    for id in env.env_objects:
+        print(env.env_objects[id],env.env_objects[id].mac_id,env.env_objects[id].layer,env.env_objects[id].coordinates,env.env_objects[id].is_beacon,env.env_objects[id].env_id)
         
     
     sync_algorithm=Network_time_sync(window,dialog_init,env)    

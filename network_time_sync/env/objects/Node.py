@@ -1,5 +1,5 @@
 from .Environment_object import *
-
+from PySide.QtCore import *
 class Node(Environment_object):
 
     #variables    
@@ -23,6 +23,19 @@ class Node(Environment_object):
         self.layer=layer
         self.is_beacon=is_beacon
         self.MAX_TRANSMITTION_RANGE=MAX_TRANSMITTION_RANGE
+        
+        
+        
+    def view_special_parameter(self):
+    #Look in dictionary
+        node=self.env_ref.env_objects[self.env_id]
+        
+        self.window_ref.label_gateway.setText(str(self.gateway))
+        self.window_ref.label_node.setText(str(self.mac_id))
+        if(node.is_beacon):
+            self.window_ref.checkBox_beacon.setCheckState(Qt.Checked)
+        else:
+           self. window_ref.checkBox_beacon.setCheckState(Qt.Unchecked)
         
         
         
