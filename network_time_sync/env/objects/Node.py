@@ -23,11 +23,25 @@ class Node(Environment_object):
         self.layer=layer
         self.is_beacon=is_beacon
         self.MAX_TRANSMITTION_RANGE=MAX_TRANSMITTION_RANGE
+        self.gui_pushButton=gui_pushButton
         
         
         
     def view_special_parameter(self):
     #Look in dictionary
+        if(self.env_ref.get_selected_item()!=None):
+            self.env_ref.get_selected_item().setStyleSheet("")
+            
+        self.env_ref.set_selected_item(self.gui_pushButton)
+        
+        #Set to the first layer
+        self.gui_pushButton.raise_()
+        
+        #mark as focused
+        self.gui_pushButton.setStyleSheet("\
+         background: rgb(200, 200, 200);\
+         border:2px solid rgb(255, 0, 0);")
+        
         node=self.env_ref.env_objects[self.env_id]
         
         self.window_ref.label_gateway.setText(str(self.gateway))
@@ -36,6 +50,7 @@ class Node(Environment_object):
             self.window_ref.checkBox_beacon.setCheckState(Qt.Checked)
         else:
            self. window_ref.checkBox_beacon.setCheckState(Qt.Unchecked)
+        
         
         
         

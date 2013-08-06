@@ -115,6 +115,16 @@ def init_env():
         pushButton_robot.setIconSize(QtCore.QSize(30, 30))
         pushButton_robot.setVisible(True)
         
+#         pushButton_robot.setCheckable(True)        
+#         pushButton_robot.setStyleSheet("QPushButton{\
+#         color: rgb(255, 255, 255);\
+#         text-align: left;\
+#         font-size: 12pt;\
+#         border: none;\
+#     }\
+#         QPushButton:checked {\
+#         background: rgb(105, 105, 105);}")
+        
         
         
 
@@ -154,6 +164,16 @@ def init_env():
         pushButton_robot.setIconSize(QtCore.QSize(30, 30))
         pushButton_robot.setObjectName("pushButton_robot_"+str(i))
         pushButton_robot.setVisible(True)
+        
+#         pushButton_robot.setCheckable(True)
+#         pushButton_robot.setStyleSheet("QPushButton{\
+#         color: rgb(255, 255, 255);\
+#         text-align: left;\
+#         font-size: 12pt;\
+#         border: none;\
+#         }\
+#         QPushButton:checked {\
+#         background: rgb(105, 105, 105);}")
         
         node = Node(node_id,-1,False,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx.value(),dialog_init.doubleSpinBox_vy.value()),pushButton_robot)
         env.set_env_object(node)
