@@ -26,15 +26,13 @@ class Network_time_sync(object):
 
 
     def initial_layer_creation(self):
-        
-        print("FOO")
+
         
         self.init_ts_thread=Init_network_time_sync_thread(self.window,self.dialog,self.env,self.features_obj)
         
        
         try:
              self.init_ts_thread.start()
-             print("WUSCH")
         except:
             pass
 

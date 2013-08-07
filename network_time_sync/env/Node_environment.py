@@ -8,21 +8,18 @@ from PySide.QtCore import *
 
 
 class Node_environment(object):
+    button_list=[]
     
-    selected_item=None
-    
-    id=-1
-    #Geometric variables of the environment
-    length      =   0
-    width       =   0
-    grid        =   []
-    env_objects =   {}
+
 
 
     #Constructor
     def __init__(self, length, width):
         self.length=length
         self.width=width
+        self.selected_item=None
+        self.id=-1
+        self.env_objects =   {}
          
 
         
@@ -35,8 +32,16 @@ class Node_environment(object):
         environmental_object.set_env_id(env_id)
         
         
+        #add button to delete list!!
+        Node_environment.button_list.append(environmental_object.gui_pushButton)
         
-
+        
+        
+    def get_length(self):
+        return self.length
+    
+    def get_width(self):
+        return self.width
         
         
     def get_env_id(self):
@@ -49,6 +54,8 @@ class Node_environment(object):
     def set_selected_item(self,selected_item):
         self.selected_item=selected_item
         
+        
+    
     
         
         

@@ -17,7 +17,6 @@ class Init_network_time_sync_thread(QThread):
 
     
     def __init__(self,window,dialog,env,features_obj):
-        print("FUU")
         super(Init_network_time_sync_thread,self).__init__(None)
         self.window=window
         self.dialog=dialog
@@ -50,7 +49,6 @@ class Init_network_time_sync_thread(QThread):
     
     
     def run(self):
-        print("MUUP")
         new_passive_node_list=[]
         active_node_list=[]
         passive_node_list=[]
@@ -91,7 +89,8 @@ class Init_network_time_sync_thread(QThread):
          
          
         #self.features_obj.draw_graph()
-                 
+        print(self.env.env_objects)
+        print(self.env)         
         #Degugging
         for id in self.env.env_objects:
             print(self.env.env_objects[id],self.env.env_objects[id].mac_id,self.env.env_objects[id].layer,self.env.env_objects[id].coordinates,self.env.env_objects[id].is_beacon,self.env.env_objects[id].gateway.mac_id)

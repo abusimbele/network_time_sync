@@ -45,6 +45,27 @@ random.seed(1)
 #INIT GUI#
 ##########
 
+class simulation_ad_hoc_multi_hop_network(object):
+    def __init__(self):
+        pass
+    
+    env=None
+    sync_algorithm=None
+    window=None
+    dialog_init=None
+    buttons=[]
+    
+    @staticmethod
+    def delete_buttons():
+        for i in simulation_ad_hoc_multi_hop_network.buttons:
+            i.deleteLater()
+            simulation_ad_hoc_multi_hop_network.buttons=[]
+        
+    
+    
+
+    
+
 class MyApplication(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MyApplication, self).__init__(parent)
@@ -57,20 +78,24 @@ class MyDialog(QtGui.QDialog, Ui_Dialog):
 
 
 app = QtGui.QApplication(sys.argv)
-window = MyApplication()
-dialog_init = MyDialog()
+simulation_ad_hoc_multi_hop_network.window =  MyApplication()
+window = simulation_ad_hoc_multi_hop_network.window
 
-env=Node_environment(0,0)
+simulation_ad_hoc_multi_hop_network.dialog_init = MyDialog()
+dialog_init =simulation_ad_hoc_multi_hop_network.dialog_init
+
+#env=Node_environment(0,0)
 
 
 #Init features object
 features_obj=Draw_features()
 features_obj.set_window(window)
-features_obj.set_env(env)
+features_obj.set_env(simulation_ad_hoc_multi_hop_network.env)
+
+#print("env:",env)
 
 
 
-sync_algorithm=Network_time_sync(window,dialog_init,env,features_obj)
 
 
 
@@ -90,9 +115,19 @@ sync_algorithm=Network_time_sync(window,dialog_init,env,features_obj)
 #Action_methods:
 #INIT the environment trough the dialog choices
 def init_env():
+    
+    if (len(simulation_ad_hoc_multi_hop_network.buttons)>0):
+        simulation_ad_hoc_multi_hop_network.delete_buttons()
+        
+        
     env_length=dialog_init.spinBox_env_length.value()
     env_width=dialog_init.spinBox_env_width.value()
-    env = Node_environment(env_length,env_width)
+    simulation_ad_hoc_multi_hop_network.env = Node_environment(env_length,env_width)
+    #Store for all classes
+    env=simulation_ad_hoc_multi_hop_network.env
+    print(env)
+    print(simulation_ad_hoc_multi_hop_network.env)
+    
     
     
     
@@ -123,6 +158,8 @@ def init_env():
         pushButton_robot.setIcon(icon)
         pushButton_robot.setIconSize(QtCore.QSize(30, 30))
         pushButton_robot.setVisible(True)
+        #register for deletion
+        simulation_ad_hoc_multi_hop_network.buttons.append(pushButton_robot)
         
 #         pushButton_robot.setCheckable(True)        
 #         pushButton_robot.setStyleSheet("QPushButton{\
@@ -174,6 +211,9 @@ def init_env():
         pushButton_robot.setObjectName("pushButton_robot_"+str(i))
         pushButton_robot.setVisible(True)
         
+        #register for deletion
+        simulation_ad_hoc_multi_hop_network.buttons.append(pushButton_robot)
+        
 #         pushButton_robot.setCheckable(True)
 #         pushButton_robot.setStyleSheet("QPushButton{\
 #         color: rgb(255, 255, 255);\
@@ -200,7 +240,10 @@ def init_env():
         pushButton_robot.clicked.connect(node.view_special_parameter)
         
         i=i+1
-
+        
+        
+        simulation_ad_hoc_multi_hop_network.sync_algorithm=Network_time_sync(window,dialog_init,simulation_ad_hoc_multi_hop_network.env,features_obj)
+        window.pushButton_start_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
  
  ######################################
  #ERROR_PRONE CODE -> END
@@ -211,17 +254,18 @@ def init_env():
         
 #################################################################
 
-
+    print(env)
+    print(simulation_ad_hoc_multi_hop_network.env)
+    
     #Debugging
     for id in env.env_objects:
         print(env.env_objects[id],env.env_objects[id].mac_id,env.env_objects[id].layer,env.env_objects[id].coordinates,env.env_objects[id].is_beacon,env.env_objects[id].env_id)
         
-    
-    sync_algorithm=Network_time_sync(window,dialog_init,env,features_obj)  
+  
     
       
     
-    
+
 
 
     
@@ -230,7 +274,7 @@ def init_env():
     
     
     #Debugging
-    print(sync_algorithm.env.env_objects)
+    #print(sync_algorithm.env.env_objects)
     
     
        
@@ -255,7 +299,7 @@ window.actionINIT.triggered.connect(dialog_init.show)
 #INIT-Dialog:
 dialog_init.buttonBox_dialog_init.accepted.connect(init_env)
 
-window.pushButton_start_simulation.clicked.connect(sync_algorithm.initial_layer_creation)
+
 
 
 
