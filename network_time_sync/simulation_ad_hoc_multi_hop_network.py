@@ -22,10 +22,11 @@ import random
 from gui import dialog_init
 from gui.Draw_features import *
 from algorithms.Network_time_sync import Network_time_sync
+from tkinter.dialog import DIALOG_ICON
 
 
 
-MAX_TRANSMITTION_RANGE=100.0
+MAX_TRANSMITTION_RANGE=150.0
 
 
 
@@ -54,6 +55,7 @@ class simulation_ad_hoc_multi_hop_network(object):
     window=None
     dialog_init=None
     buttons=[]
+    features_obj=None
     
     @staticmethod
     def delete_buttons():
@@ -87,10 +89,7 @@ dialog_init =simulation_ad_hoc_multi_hop_network.dialog_init
 #env=Node_environment(0,0)
 
 
-#Init features object
-features_obj=Draw_features()
-features_obj.set_window(window)
-features_obj.set_env(simulation_ad_hoc_multi_hop_network.env)
+
 
 #print("env:",env)
 
@@ -242,9 +241,19 @@ def init_env():
         i=i+1
         
         
+        #Init features object
+        simulation_ad_hoc_multi_hop_network.features_obj=Draw_features()
+        simulation_ad_hoc_multi_hop_network.features_obj.set_window(window)
+        simulation_ad_hoc_multi_hop_network.features_obj.set_env(simulation_ad_hoc_multi_hop_network.env)
+        features_obj=simulation_ad_hoc_multi_hop_network.features_obj
+        
         simulation_ad_hoc_multi_hop_network.sync_algorithm=Network_time_sync(window,dialog_init,simulation_ad_hoc_multi_hop_network.env,features_obj)
         window.pushButton_start_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
- 
+        
+        
+        
+
+         
  ######################################
  #ERROR_PRONE CODE -> END
  ######################################
@@ -280,7 +289,7 @@ def init_env():
        
     
 
-    
+  
                     
 def poo():
     print("POO")
@@ -298,8 +307,6 @@ window.actionINIT.triggered.connect(dialog_init.show)
 
 #INIT-Dialog:
 dialog_init.buttonBox_dialog_init.accepted.connect(init_env)
-
-
 
 
 

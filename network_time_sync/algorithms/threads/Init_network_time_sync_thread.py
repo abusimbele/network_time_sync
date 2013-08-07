@@ -88,9 +88,7 @@ class Init_network_time_sync_thread(QThread):
             active_node_list.sort(key=lambda tup: tup[0],reverse=False)
          
          
-        #self.features_obj.draw_graph()
-        print(self.env.env_objects)
-        print(self.env)         
+         
         #Degugging
         for id in self.env.env_objects:
             print(self.env.env_objects[id],self.env.env_objects[id].mac_id,self.env.env_objects[id].layer,self.env.env_objects[id].coordinates,self.env.env_objects[id].is_beacon,self.env.env_objects[id].gateway.mac_id)

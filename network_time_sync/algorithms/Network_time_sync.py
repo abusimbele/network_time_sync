@@ -35,6 +35,7 @@ class Network_time_sync(object):
              self.init_ts_thread.start()
         except:
             pass
+        self.features_obj.draw_graph() 
 
            
 

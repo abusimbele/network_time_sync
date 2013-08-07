@@ -23,11 +23,21 @@
       <height>411</height>
      </rect>
     </property>
+    <widget class="QGraphicsView" name="graphicsView_sim">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>571</width>
+       <height>411</height>
+      </rect>
+     </property>
+    </widget>
     <widget class="QPushButton" name="pushButton_robot_1">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>190</y>
+       <x>20</x>
+       <y>20</y>
        <width>41</width>
        <height>41</height>
       </rect>
@@ -119,7 +129,7 @@
      <item row="2" column="0">
       <widget class="QLabel" name="label_txt_gateway">
        <property name="text">
-        <string>Gateway:</string>
+        <string>gateway:</string>
        </property>
       </widget>
      </item>
