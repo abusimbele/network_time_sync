@@ -29,7 +29,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -65,7 +65,14 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QSpinBox" name="spinBox_nb_nodes"/>
+       <widget class="QSpinBox" name="spinBox_nb_nodes">
+        <property name="maximum">
+         <number>200</number>
+        </property>
+        <property name="value">
+         <number>15</number>
+        </property>
+       </widget>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_txt_nb_beacons">
@@ -75,7 +82,11 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QSpinBox" name="spinBox_nb_beacons"/>
+       <widget class="QSpinBox" name="spinBox_nb_beacons">
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="label_txt_vx">
@@ -132,10 +143,24 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QSpinBox" name="spinBox_env_width"/>
+       <widget class="QSpinBox" name="spinBox_env_width">
+        <property name="maximum">
+         <number>300</number>
+        </property>
+        <property name="value">
+         <number>300</number>
+        </property>
+       </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QSpinBox" name="spinBox_env_length"/>
+       <widget class="QSpinBox" name="spinBox_env_length">
+        <property name="maximum">
+         <number>300</number>
+        </property>
+        <property name="value">
+         <number>300</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

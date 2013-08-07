@@ -26,27 +26,34 @@ class Draw_features(object):
         
         
     def draw_graph(self):
+        
+
+
+
+        
+        #BAD, buttons behind view!!!
+        #self.window.graphicsView_sim.raise_()
         scene=QGraphicsScene()
         self.window.graphicsView_sim.setScene(scene)  
-        self.window.graphicsView_sim.fitInView(QtCore.QRect(0,0,300,300))      
-        scene.addLine(300,300,0,0) 
+        self.window.graphicsView_sim.setSceneRect(QtCore.QRect(0, 0, 575, 400))
+        pen = QtGui.QPen(QtCore.Qt.gray, 2, QtCore.Qt.DotLine)
+
         
-        OFFSET_X=0
-        OFFSET_Y=0
+
         #Draw Graph
         for key in self.env.env_objects:
             node=self.env.env_objects[key]        
-            node_x  =   node.coordinates[0]-OFFSET_X
-            node_y  =   node.coordinates[1]-OFFSET_Y
+            node_x  =   node.coordinates[0]
+            node_y  =   node.coordinates[1]
              
             gateway =   node.gateway
              
-            gateway_x   = gateway.coordinates[0]-OFFSET_X
-            gateway_y   = gateway.coordinates[1]-OFFSET_Y
+            gateway_x   = gateway.coordinates[0]
+            gateway_y   = gateway.coordinates[1]
             
-            print
-            print(gateway_x,gateway_y,node_x,node_y)
-            scene.addLine(gateway_x,gateway_y,node_x,node_y)
+            scene.addLine(gateway_x,gateway_y,node_x,node_y,pen)
+            
+    
         
              
             

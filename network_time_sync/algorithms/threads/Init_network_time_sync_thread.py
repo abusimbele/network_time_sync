@@ -90,9 +90,9 @@ class Init_network_time_sync_thread(QThread):
          
          
         #Degugging
-        for id in self.env.env_objects:
-            print(self.env.env_objects[id],self.env.env_objects[id].mac_id,self.env.env_objects[id].layer,self.env.env_objects[id].coordinates,self.env.env_objects[id].is_beacon,self.env.env_objects[id].gateway.mac_id)
-                 
+#         for id in self.env.env_objects:
+#             print(self.env.env_objects[id],self.env.env_objects[id].mac_id,self.env.env_objects[id].layer,self.env.env_objects[id].coordinates,self.env.env_objects[id].is_beacon,self.env.env_objects[id].gateway.mac_id)
+                
                            
                    
                 

@@ -7,6 +7,7 @@ Created on 24.07.2013
 from PySide.QtGui import *
 from PySide.QtCore import *
 
+
 from env.Node_environment import *
 from env.objects.Node import *
 from env.objects.Space import *
@@ -23,6 +24,8 @@ from gui import dialog_init
 from gui.Draw_features import *
 from algorithms.Network_time_sync import Network_time_sync
 from tkinter.dialog import DIALOG_ICON
+import PySide
+from PySide import QtGui
 
 
 
@@ -115,6 +118,10 @@ dialog_init =simulation_ad_hoc_multi_hop_network.dialog_init
 #INIT the environment trough the dialog choices
 def init_env():
     
+    #clear scene:
+    simulation_ad_hoc_multi_hop_network.window.graphicsView_sim.setScene(PySide.QtGui.QGraphicsScene())
+        
+    
     if (len(simulation_ad_hoc_multi_hop_network.buttons)>0):
         simulation_ad_hoc_multi_hop_network.delete_buttons()
         
@@ -124,8 +131,7 @@ def init_env():
     simulation_ad_hoc_multi_hop_network.env = Node_environment(env_length,env_width)
     #Store for all classes
     env=simulation_ad_hoc_multi_hop_network.env
-    print(env)
-    print(simulation_ad_hoc_multi_hop_network.env)
+
     
     
     
@@ -263,13 +269,12 @@ def init_env():
         
 #################################################################
 
-    print(env)
-    print(simulation_ad_hoc_multi_hop_network.env)
+
     
     #Debugging
-    for id in env.env_objects:
-        print(env.env_objects[id],env.env_objects[id].mac_id,env.env_objects[id].layer,env.env_objects[id].coordinates,env.env_objects[id].is_beacon,env.env_objects[id].env_id)
-        
+#     for id in env.env_objects:
+#         print(env.env_objects[id],env.env_objects[id].mac_id,env.env_objects[id].layer,env.env_objects[id].coordinates,env.env_objects[id].is_beacon,env.env_objects[id].env_id)
+      
   
     
       
@@ -287,9 +292,9 @@ def init_env():
     
     
        
-    
-
   
+
+
                     
 def poo():
     print("POO")
@@ -316,6 +321,12 @@ dialog_init.buttonBox_dialog_init.accepted.connect(init_env)
 
 #######################################################################
 
+
+#BAD, buttons behind view!!!
+# window.graphicsView_sim.setStyleSheet("background:transparent;");
+# window.graphicsView_sim.setAttribute(Qt.WA_TranslucentBackground);
+# window.graphicsView_sim.setWindowFlags(Qt.FramelessWindowHint);
+# window.graphicsView_sim.raise_()
 
 
 window.show()

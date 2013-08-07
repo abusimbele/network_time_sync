@@ -17,10 +17,10 @@
    <widget class="QWidget" name="widget_simulation_window" native="true">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>571</width>
-      <height>411</height>
+      <x>0</x>
+      <y>0</y>
+      <width>600</width>
+      <height>450</height>
      </rect>
     </property>
     <widget class="QGraphicsView" name="graphicsView_sim">
@@ -28,16 +28,16 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>571</width>
-       <height>411</height>
+       <width>580</width>
+       <height>450</height>
       </rect>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_robot_1">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>20</y>
+       <x>0</x>
+       <y>0</y>
        <width>41</width>
        <height>41</height>
       </rect>

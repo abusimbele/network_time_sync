@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Work\Desktop\window_main.ui'
 #
-# Created: Wed Aug  7 18:30:39 2013
+# Created: Thu Aug  8 00:00:32 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -16,13 +16,13 @@ class Ui_MainWindow(object):
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.widget_simulation_window = QtGui.QWidget(self.centralwidget)
-        self.widget_simulation_window.setGeometry(QtCore.QRect(20, 20, 571, 411))
+        self.widget_simulation_window.setGeometry(QtCore.QRect(0, 0, 600, 450))
         self.widget_simulation_window.setObjectName("widget_simulation_window")
         self.graphicsView_sim = QtGui.QGraphicsView(self.widget_simulation_window)
-        self.graphicsView_sim.setGeometry(QtCore.QRect(0, 0, 571, 411))
+        self.graphicsView_sim.setGeometry(QtCore.QRect(0, 0, 580, 450))
         self.graphicsView_sim.setObjectName("graphicsView_sim")
 #         self.pushButton_robot_1 = QtGui.QPushButton(self.widget_simulation_window)
-#         self.pushButton_robot_1.setGeometry(QtCore.QRect(20, 20, 41, 41))
+#         self.pushButton_robot_1.setGeometry(QtCore.QRect(0, 0, 41, 41))
 #         self.pushButton_robot_1.setText("")
 #         icon = QtGui.QIcon()
 #         icon.addPixmap(QtGui.QPixmap(":/images/robot_beacon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -204,5 +204,6 @@ class Ui_MainWindow(object):
         self.menuSimulation.setTitle(QtGui.QApplication.translate("MainWindow", "simulation", None, QtGui.QApplication.UnicodeUTF8))
         self.actionVersion.setText(QtGui.QApplication.translate("MainWindow", "Version", None, QtGui.QApplication.UnicodeUTF8))
         self.actionINIT.setText(QtGui.QApplication.translate("MainWindow", "INIT", None, QtGui.QApplication.UnicodeUTF8))
+
 
 import images.robots_rc
