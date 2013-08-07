@@ -7,7 +7,7 @@ class Node(Environment_object):
     layer               =   0
     is_beacon           =   False
     STRING_CODE_TYPE    =   "X" 
-    gateway=-1  
+    gateway             =   None  
     gui_pushButton      =   None
     
     #const
@@ -24,6 +24,7 @@ class Node(Environment_object):
         self.is_beacon=is_beacon
         self.MAX_TRANSMITTION_RANGE=MAX_TRANSMITTION_RANGE
         self.gui_pushButton=gui_pushButton
+        self.gateway=self
         
         
         
@@ -44,13 +45,19 @@ class Node(Environment_object):
         
         node=self.env_ref.env_objects[self.env_id]
         
-        self.window_ref.label_gateway.setText(str(self.gateway))
+        self.window_ref.label_gateway.setText(str(self.gateway.mac_id))
         self.window_ref.label_node.setText(str(self.mac_id))
         if(node.is_beacon):
             self.window_ref.checkBox_beacon.setCheckState(Qt.Checked)
         else:
            self. window_ref.checkBox_beacon.setCheckState(Qt.Unchecked)
-        
+           
+           
+           
+
+    def set_gateway(self,gateway):
+        self.gateway=gateway
+
         
         
         

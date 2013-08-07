@@ -19,13 +19,13 @@ from gui.dialog_init import  *
 import sys
 import random
 
-from Agitator import Agitator
 from gui import dialog_init
-from Network_time_sync import Network_time_sync
+from gui.Draw_features import *
+from algorithms.Network_time_sync import Network_time_sync
 
 
 
-MAX_TRANSMITTION_RANGE=200.0
+MAX_TRANSMITTION_RANGE=100.0
 
 
 
@@ -60,9 +60,18 @@ app = QtGui.QApplication(sys.argv)
 window = MyApplication()
 dialog_init = MyDialog()
 
-
 env=Node_environment(0,0)
-sync_algorithm=Network_time_sync(window,dialog_init,env)
+
+
+#Init features object
+features_obj=Draw_features()
+features_obj.set_window(window)
+features_obj.set_env(env)
+
+
+
+sync_algorithm=Network_time_sync(window,dialog_init,env,features_obj)
+
 
 
 
@@ -208,7 +217,9 @@ def init_env():
         print(env.env_objects[id],env.env_objects[id].mac_id,env.env_objects[id].layer,env.env_objects[id].coordinates,env.env_objects[id].is_beacon,env.env_objects[id].env_id)
         
     
-    sync_algorithm=Network_time_sync(window,dialog_init,env)    
+    sync_algorithm=Network_time_sync(window,dialog_init,env,features_obj)  
+    
+      
     
     
 

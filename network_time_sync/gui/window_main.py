@@ -204,5 +204,8 @@ class Ui_MainWindow(object):
         self.menuSimulation.setTitle(QtGui.QApplication.translate("MainWindow", "simulation", None, QtGui.QApplication.UnicodeUTF8))
         self.actionVersion.setText(QtGui.QApplication.translate("MainWindow", "Version", None, QtGui.QApplication.UnicodeUTF8))
         self.actionINIT.setText(QtGui.QApplication.translate("MainWindow", "INIT", None, QtGui.QApplication.UnicodeUTF8))
+        
+        
+        
 
 import images.robots_rc
