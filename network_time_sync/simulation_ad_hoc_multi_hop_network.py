@@ -1,7 +1,7 @@
 '''
 Created on 24.07.2013
 
-@author: Work
+@author: Sascha Friedrich
 '''
 
 from PySide.QtGui import *
@@ -124,6 +124,10 @@ def init_env():
     
     if (len(simulation_ad_hoc_multi_hop_network.buttons)>0):
         simulation_ad_hoc_multi_hop_network.delete_buttons()
+        #DISCONNECT old trigger and register at the end the new trigger with the new ENV-OBJECT!!!
+        window.pushButton_crash_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.crash_node)
+        
+         
         
         
     env_length=dialog_init.spinBox_env_length.value()
@@ -131,6 +135,8 @@ def init_env():
     simulation_ad_hoc_multi_hop_network.env = Node_environment(env_length,env_width)
     #Store for all classes
     env=simulation_ad_hoc_multi_hop_network.env
+    
+    
 
     
     
@@ -190,9 +196,15 @@ def init_env():
         node.set_window_ref(window)
         node.set_env_ref(env)
 
-        #SIGNAL_SLOTS:
+
+        ################################
+        # SIGNAL_SLOTS AFTER ENV INIT: #
+        ################################
+        
+        #show parameter at the right side of the main-window
         pushButton_robot.clicked.connect(node.view_parameter)
         pushButton_robot.clicked.connect(node.view_special_parameter)
+        
         
        
         i=i+1
@@ -257,6 +269,14 @@ def init_env():
         window.pushButton_start_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
         
         
+    #crash a node CONNECT
+    window.pushButton_crash_node.clicked.connect(simulation_ad_hoc_multi_hop_network.env.crash_node)
+    
+    #INIT first neighborhood-tables
+    env.create_neighborhood_sorted_list_ALL()
+
+        
+        
         
 
          
@@ -312,6 +332,9 @@ window.actionINIT.triggered.connect(dialog_init.show)
 
 #INIT-Dialog:
 dialog_init.buttonBox_dialog_init.accepted.connect(init_env)
+
+
+
 
 
 

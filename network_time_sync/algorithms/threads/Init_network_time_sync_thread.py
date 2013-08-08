@@ -1,8 +1,14 @@
+'''
+Created on 24.07.2013
+
+@author: Sascha Friedrich
+'''
 
 from PySide.QtGui import *
 from PySide.QtCore import *
 from env.Node_environment import *
 from gui.Draw_features import *
+from own_math.Calculate import *
 
 
 
@@ -12,6 +18,7 @@ from gui.Draw_features import *
 
 class Init_network_time_sync_thread(QThread):
     
+    #static
     features_obj=None
     
 
@@ -23,31 +30,7 @@ class Init_network_time_sync_thread(QThread):
         self.env=env
         self.features_obj=features_obj
         
-        
-    
-    
-    def euclidean(self,base_node,node):
-        sumSq=0.0
-        x=[]
-        y=[]
-        x.append(base_node.coordinates[0])
-        x.append(base_node.coordinates[1])
-        y.append(node.coordinates[0])
-        y.append(node.coordinates[1])
 
-        
-        
-     
-        #add up the squared differences
-        for i in range(len(x)):
-            sumSq+=(x[i]-y[i])**2
-     
-        #take the square root of the result
-        return (sumSq**0.5)
-    
-
-    
-    
     def run(self):
         new_passive_node_list=[]
         active_node_list=[]
@@ -69,7 +52,7 @@ class Init_network_time_sync_thread(QThread):
             new_passive_node_list=[]
             base_node = active_node_list.pop(0)[1] 
             for node in passive_node_list:                
-                distance = self.euclidean(base_node,node)
+                distance = Calculate.euclidean(base_node,node)
 
                 if distance <= base_node.MAX_TRANSMITTION_RANGE:
                     node.layer=base_node.layer+1

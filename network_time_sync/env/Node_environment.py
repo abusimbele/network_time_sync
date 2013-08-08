@@ -1,13 +1,16 @@
 '''
 Created on 24.07.2013
 
-@author: Work
+@author: Sascha Friedrich
 '''
 #Describes the environment for the nodes
 from PySide.QtCore import *
+from env.objects.Node_state import Node_state
 
 
 class Node_environment(object):
+    
+    #static
     button_list=[]
     
 
@@ -53,6 +56,24 @@ class Node_environment(object):
     
     def set_selected_item(self,selected_item):
         self.selected_item=selected_item
+
+        
+        
+        
+        
+    def crash_node(self):
+        self.selected_item.node_state.change_state(Node_state.STATE_CRASHED)
+        self.selected_item.gui_pushButton.setStyleSheet("background: rgb(150, 0, 0);")
+        self.create_neighborhood_sorted_list_ALL()
+        
+        
+    def create_neighborhood_sorted_list_ALL(self):
+        for key in self.env_objects:
+            self.env_objects[key].create_neighborhood_sorted_list()
+            
+        
+        
+        
         
         
     

@@ -1,8 +1,9 @@
 '''
-Created on 06.08.2013
+Created on 24.07.2013
 
-@author: Work
+@author: Sascha Friedrich
 '''
+
 from PySide import QtCore, QtGui
 from env.Node_environment import Node_environment
 from PySide.QtGui import *
@@ -10,12 +11,13 @@ from PySide.QtGui import *
 
 
 class Draw_features(object):
-    
-    env=None
-    window=None
+
+
 
     def __init__(self):
-        pass
+        self.env    =   None
+        self.window =   None
+        self.scene  =   None
     
     def set_window(self,window):
         self.window=window
@@ -27,14 +29,11 @@ class Draw_features(object):
         
     def draw_graph(self):
         
-
-
-
         
         #BAD, buttons behind view!!!
         #self.window.graphicsView_sim.raise_()
-        scene=QGraphicsScene()
-        self.window.graphicsView_sim.setScene(scene)  
+        self.scene=QGraphicsScene()
+        self.window.graphicsView_sim.setScene(self.scene)  
         self.window.graphicsView_sim.setSceneRect(QtCore.QRect(0, 0, 575, 400))
         pen = QtGui.QPen(QtCore.Qt.gray, 2, QtCore.Qt.DotLine)
 
@@ -51,7 +50,7 @@ class Draw_features(object):
             gateway_x   = gateway.coordinates[0]
             gateway_y   = gateway.coordinates[1]
             
-            scene.addLine(gateway_x,gateway_y,node_x,node_y,pen)
+            self.scene.addLine(gateway_x,gateway_y,node_x,node_y,pen)
             
     
         

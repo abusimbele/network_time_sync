@@ -1,47 +1,67 @@
+'''
+Created on 24.07.2013
+
+@author: Sascha Friedrich
+'''
+
 from .Environment_object import *
 from PySide.QtCore import *
+from env.objects.Node_state import *
+from own_math.Calculate import *
+
 class Node(Environment_object):
 
-    #variables    
-    mac_id              =   0
-    layer               =   0
-    is_beacon           =   False
-    STRING_CODE_TYPE    =   "X" 
-    gateway             =   None  
-    gui_pushButton      =   None
-    
-    #const
-    MAX_TRANSMITTION_RANGE  =   0
     
     
     
     
     def __init__(self, mac_id,layer,is_beacon,MAX_TRANSMITTION_RANGE,coordinates,velocity_vector,gui_pushButton):
-        Environment_object.__init__(self,self.STRING_CODE_TYPE,coordinates,velocity_vector)
         
+        STRING_CODE_TYPE    =   "X" 
+        
+        Environment_object.__init__(self,STRING_CODE_TYPE,coordinates,velocity_vector)
+        
+        self.node_state=Node_state()
         self.mac_id=mac_id
         self.layer=layer
         self.is_beacon=is_beacon
         self.MAX_TRANSMITTION_RANGE=MAX_TRANSMITTION_RANGE
         self.gui_pushButton=gui_pushButton
         self.gateway=self
+        self.neighborhood_sorted_list=[]
+        
+        
         
         
         
     def view_special_parameter(self):
     #Look in dictionary
         if(self.env_ref.get_selected_item()!=None):
-            self.env_ref.get_selected_item().setStyleSheet("")
             
-        self.env_ref.set_selected_item(self.gui_pushButton)
+            
+            #DELETE OLD MARKER AT OLD SELECTED ITEM
+            if(self.env_ref.get_selected_item().node_state.state_name==Node_state.STATE_CRASHED):
+                self.env_ref.get_selected_item().gui_pushButton.setStyleSheet("background: rgb(150, 0, 0);")
+
+            else:
+                self.env_ref.get_selected_item().gui_pushButton.setStyleSheet("")
+            
+            
+        self.env_ref.set_selected_item(self)
         
         #Set to the first layer
         self.gui_pushButton.raise_()
         
         #mark as focused
-        self.gui_pushButton.setStyleSheet("\
-         background: rgb(200, 200, 200);\
-         border:2px solid rgb(255, 0, 0);")
+        
+        if(self.node_state.state_name==Node_state.STATE_CRASHED):
+            self.gui_pushButton.setStyleSheet("\
+            background: rgb(150, 0, 0);\
+            border:2px solid rgb(255, 0, 0);")
+        else:
+            self.gui_pushButton.setStyleSheet("\
+            background: rgb(200, 200, 200);\
+            border:2px solid rgb(255, 0, 0);")
         
         node=self.env_ref.env_objects[self.env_id]
         
@@ -57,7 +77,30 @@ class Node(Environment_object):
 
     def set_gateway(self,gateway):
         self.gateway=gateway
+        
+        
+        
 
+        
+        
+        
+    def create_neighborhood_sorted_list(self):
+        self.neighborhood_sorted_list=[]
+        for key in self.env_ref.env_objects:
+            node=self.env_ref.env_objects[key]
+            if(node !=self and node.node_state.state_name==Node_state.STATE_ACTIVE):
+                distance = Calculate.euclidean(self,node)
+                if distance <= node.MAX_TRANSMITTION_RANGE:
+                    self.neighborhood_sorted_list.append((distance,node))
+        self.neighborhood_sorted_list.sort(key=lambda tup: tup[0],reverse=False)
+        print(self.neighborhood_sorted_list)
+            
+            
+        
+        
+        
+
+    
         
         
         

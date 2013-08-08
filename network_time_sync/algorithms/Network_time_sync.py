@@ -1,4 +1,8 @@
+'''
+Created on 24.07.2013
 
+@author: Sascha Friedrich
+'''
 
 from PySide.QtGui import *
 from PySide.QtCore import *
@@ -13,6 +17,7 @@ from algorithms.threads.Init_network_time_sync_thread import *
 
 class Network_time_sync(object):
     
+    #static
     features_obj=None
     
 

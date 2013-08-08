@@ -1,22 +1,17 @@
 '''
 Created on 24.07.2013
 
-@author: Work
+@author: Sascha Friedrich
 '''
 
 class Environment_object(object):
     
-    string_code_type=""
-    coordinates         =   (0,0)
-    velocity_vector     =   (0,0)
-    env_id              =   -1
-    window_ref          =   None
-    env_ref             =   None
-
-
 
     def __init__(self,string_code_type,coordinates,velocity_vector):
-#         print "Not yet implemented"
+        
+        self.env_id              =   -1
+        self.window_ref          =   None
+        self.env_ref             =   None
         self.string_code_type=string_code_type
         self.coordinates=coordinates
         self.velocity_vector=velocity_vector
