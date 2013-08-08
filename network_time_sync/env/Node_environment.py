@@ -23,6 +23,7 @@ class Node_environment(object):
         self.selected_item=None
         self.id=-1
         self.env_objects =   {}
+        self.features_obj=None
          
 
         
@@ -58,7 +59,8 @@ class Node_environment(object):
         self.selected_item=selected_item
 
         
-        
+    def set_features_obj(self,features_obj):
+        self.features_obj=features_obj
         
         
     def crash_node(self):

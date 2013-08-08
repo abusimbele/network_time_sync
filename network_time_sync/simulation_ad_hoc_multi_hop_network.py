@@ -120,6 +120,8 @@ def init_env():
     
     #clear scene:
     simulation_ad_hoc_multi_hop_network.window.graphicsView_sim.setScene(PySide.QtGui.QGraphicsScene())
+    #ANTIALISING ON
+    simulation_ad_hoc_multi_hop_network.window.graphicsView_sim.setRenderHint(QtGui.QPainter.Antialiasing)
         
     
     if (len(simulation_ad_hoc_multi_hop_network.buttons)>0):
@@ -274,7 +276,8 @@ def init_env():
     
     #INIT first neighborhood-tables
     env.create_neighborhood_sorted_list_ALL()
-
+    
+    env.set_features_obj(features_obj)
         
         
         

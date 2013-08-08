@@ -52,6 +52,16 @@ class Draw_features(object):
             
             self.scene.addLine(gateway_x,gateway_y,node_x,node_y,pen)
             
+    def draw_trans_range(self):
+        self.draw_graph()
+        #self.scene=QGraphicsScene()
+        #self.window.graphicsView_sim.setScene(self.scene)  
+        #self.window.graphicsView_sim.setSceneRect(QtCore.QRect(0, 0, 575, 400))
+        pen = QtGui.QPen(QtCore.Qt.red, 3)
+        self.scene.addEllipse(self.env.get_selected_item().coordinates[0]-120,self.env.get_selected_item().coordinates[1]-150,290,290,pen)
+        
+        
+        
     
         
              

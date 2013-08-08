@@ -6,8 +6,13 @@ Created on 24.07.2013
 
 from .Environment_object import *
 from PySide.QtCore import *
+from PySide.QtGui import *
 from env.objects.Node_state import *
 from own_math.Calculate import *
+from gui import Draw_features
+
+
+
 
 class Node(Environment_object):
 
@@ -35,6 +40,15 @@ class Node(Environment_object):
         
         
     def view_special_parameter(self):
+        
+        
+       
+        
+        
+        #Show neighborhood
+        self.set_items_to_neighborhood_sorted_list_view()
+        
+        
     #Look in dictionary
         if(self.env_ref.get_selected_item()!=None):
             
@@ -73,6 +87,10 @@ class Node(Environment_object):
            self. window_ref.checkBox_beacon.setCheckState(Qt.Unchecked)
            
            
+        #show max-trans-circle
+        self.env_ref.features_obj.draw_trans_range()
+           
+           
            
 
     def set_gateway(self,gateway):
@@ -93,13 +111,23 @@ class Node(Environment_object):
                 if distance <= node.MAX_TRANSMITTION_RANGE:
                     self.neighborhood_sorted_list.append((distance,node))
         self.neighborhood_sorted_list.sort(key=lambda tup: tup[0],reverse=False)
-        print(self.neighborhood_sorted_list)
+        #print(self.neighborhood_sorted_list)
+        
+        
+    def set_items_to_neighborhood_sorted_list_view(self):
+        list=self.window_ref.listView_neighbours
+        model = QStandardItemModel(list)
+        for neighb in self.neighborhood_sorted_list:
+            item    =   QStandardItem('node: '+str(neighb[1].mac_id)+'   dist.: '+ str(round(neighb[0],2))+'m')
+            model.appendRow(item)
+        
             
+        list.setModel(model)
+        list.show()
+          
             
         
-        
-        
-
+ 
     
         
         
