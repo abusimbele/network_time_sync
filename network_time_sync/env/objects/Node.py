@@ -41,8 +41,9 @@ class Node(Environment_object):
         
     def view_special_parameter(self):
         
-        
-       
+        #print("2: ",self.env_ref.sync_algorithm)
+        #self.env_ref.sync_algorithm.gateway_lost()
+        self.env_ref.create_neighborhood_sorted_list_ALL()
         
         
         #Show neighborhood
@@ -84,7 +85,7 @@ class Node(Environment_object):
         if(node.is_beacon):
             self.window_ref.checkBox_beacon.setCheckState(Qt.Checked)
         else:
-           self. window_ref.checkBox_beacon.setCheckState(Qt.Unchecked)
+            self. window_ref.checkBox_beacon.setCheckState(Qt.Unchecked)
            
            
         #show max-trans-circle
@@ -106,19 +107,21 @@ class Node(Environment_object):
         self.neighborhood_sorted_list=[]
         for key in self.env_ref.env_objects:
             node=self.env_ref.env_objects[key]
+            layer_nbh=node.layer
             if(node !=self and node.node_state.state_name==Node_state.STATE_ACTIVE):
                 distance = Calculate.euclidean(self,node)
                 if distance <= node.MAX_TRANSMITTION_RANGE:
-                    self.neighborhood_sorted_list.append((distance,node))
+                    self.neighborhood_sorted_list.append((layer_nbh,distance,node))
+        #TO DO SORT lexico
         self.neighborhood_sorted_list.sort(key=lambda tup: tup[0],reverse=False)
-        #print(self.neighborhood_sorted_list)
+     
         
         
     def set_items_to_neighborhood_sorted_list_view(self):
         list=self.window_ref.listView_neighbours
         model = QStandardItemModel(list)
         for neighb in self.neighborhood_sorted_list:
-            item    =   QStandardItem('node: '+str(neighb[1].mac_id)+'   dist.: '+ str(round(neighb[0],2))+'m')
+            item    =   QStandardItem('node: '+str(neighb[2].mac_id)+' layer: '+str(neighb[2].layer)+'   dist.: '+ str(round(neighb[1],2))+'m')
             model.appendRow(item)
         
             

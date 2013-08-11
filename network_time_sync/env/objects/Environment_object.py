@@ -15,6 +15,7 @@ class Environment_object(object):
         self.string_code_type=string_code_type
         self.coordinates=coordinates
         self.velocity_vector=velocity_vector
+
     
         
         

@@ -60,10 +60,10 @@
    <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>20</y>
-      <width>160</width>
-      <height>133</height>
+      <x>590</x>
+      <y>10</y>
+      <width>201</width>
+      <height>171</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
@@ -80,7 +80,7 @@
      <item row="0" column="1">
       <widget class="QLabel" name="label_node">
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -94,35 +94,7 @@
      <item row="1" column="1">
       <widget class="QLabel" name="label_layer">
        <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_txt_x">
-       <property name="text">
-        <string>x:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="label_x">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_txt_y">
-       <property name="text">
-        <string>y:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLabel" name="label_y">
-       <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -136,11 +108,67 @@
      <item row="2" column="1">
       <widget class="QLabel" name="label_gateway">
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_txt_x">
+       <property name="text">
+        <string>x:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_x">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_txt_y">
+       <property name="text">
+        <string>y:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLabel" name="label_y">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_txt_v_x">
+       <property name="text">
+        <string>v_x:</string>
        </property>
       </widget>
      </item>
      <item row="6" column="0">
+      <widget class="QLabel" name="label_txt_v_y">
+       <property name="text">
+        <string>v_y:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLabel" name="label_v_x">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLabel" name="label_v_y">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
       <widget class="QCheckBox" name="checkBox_beacon">
        <property name="text">
         <string>beacon</string>
@@ -202,7 +230,7 @@
       <x>610</x>
       <y>360</y>
       <width>160</width>
-      <height>101</height>
+      <height>112</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -214,9 +242,16 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_delte_node">
+      <widget class="QPushButton" name="pushButton_delete_node">
        <property name="text">
         <string>delete node</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_undelete_node">
+       <property name="text">
+        <string>undelete node</string>
        </property>
       </widget>
      </item>
@@ -232,62 +267,19 @@
    <widget class="QListView" name="listView_neighbours">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>150</y>
-      <width>161</width>
-      <height>71</height>
+      <x>590</x>
+      <y>180</y>
+      <width>201</width>
+      <height>111</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QWidget" name="formLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>610</x>
-      <y>230</y>
-      <width>160</width>
-      <height>53</height>
-     </rect>
-    </property>
-    <layout class="QFormLayout" name="formLayout_2">
-     <property name="fieldGrowthPolicy">
-      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-     </property>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_txt_v_x">
-       <property name="text">
-        <string>v_x:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_txt_v_y">
-       <property name="text">
-        <string>v_y:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="label_v_y">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_v_x">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>610</x>
+      <x>590</x>
       <y>300</y>
-      <width>161</width>
+      <width>201</width>
       <height>51</height>
      </rect>
     </property>
@@ -297,13 +289,6 @@
      </item>
      <item row="2" column="1">
       <widget class="QLineEdit" name="lineEdit_v_y"/>
-     </item>
-     <item row="1" column="2">
-      <widget class="QPushButton" name="pushButton_input_v">
-       <property name="text">
-        <string>input</string>
-       </property>
-      </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_txt_v_x_2">
@@ -316,6 +301,13 @@
       <widget class="QLabel" name="label_txt_v_y_2">
        <property name="text">
         <string>v_y:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QPushButton" name="pushButton_input_v">
+       <property name="text">
+        <string>input</string>
        </property>
       </widget>
      </item>
@@ -335,7 +327,8 @@
     <property name="title">
      <string>?</string>
     </property>
-    <addaction name="actionVersion"/>
+    <addaction name="actionHelp"/>
+    <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuSimulation">
     <property name="title">
@@ -343,8 +336,8 @@
     </property>
     <addaction name="actionINIT"/>
    </widget>
-   <addaction name="menuAcoustic_Network_Simulation"/>
    <addaction name="menuSimulation"/>
+   <addaction name="menuAcoustic_Network_Simulation"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionVersion">
@@ -355,6 +348,16 @@
   <action name="actionINIT">
    <property name="text">
     <string>INIT</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
    </property>
   </action>
  </widget>

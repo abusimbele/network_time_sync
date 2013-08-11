@@ -5,8 +5,8 @@ Created on 24.07.2013
 '''
 
 from PySide import QtCore, QtGui
-from env.Node_environment import Node_environment
 from PySide.QtGui import *
+from env.objects.Node_state import Node_state
 
 
 
@@ -28,7 +28,7 @@ class Draw_features(object):
         
         
     def draw_graph(self):
-        
+    
         
         #BAD, buttons behind view!!!
         #self.window.graphicsView_sim.raise_()
@@ -50,13 +50,22 @@ class Draw_features(object):
             gateway_x   = gateway.coordinates[0]
             gateway_y   = gateway.coordinates[1]
             
-            self.scene.addLine(gateway_x,gateway_y,node_x,node_y,pen)
+            
+            #not for crashed nodes!
+            if node.node_state.state_name==Node_state.STATE_CRASHED:
+                pass
+            else:
+                self.scene.addLine(gateway_x,gateway_y,node_x,node_y,pen)
             
     def draw_trans_range(self):
         self.draw_graph()
         #self.scene=QGraphicsScene()
         #self.window.graphicsView_sim.setScene(self.scene)  
         #self.window.graphicsView_sim.setSceneRect(QtCore.QRect(0, 0, 575, 400))
+        
+        if(self.env.get_selected_item()==None):
+            return
+        
         pen = QtGui.QPen(QtCore.Qt.red, 3)
         self.scene.addEllipse(self.env.get_selected_item().coordinates[0]-120,self.env.get_selected_item().coordinates[1]-150,290,290,pen)
         

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Work\Desktop\dialog_init.ui'
 #
-# Created: Thu Aug  8 00:00:33 2013
+# Created: Sat Aug 10 00:13:31 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -38,14 +38,15 @@ class Ui_Dialog(object):
         self.label_txt_nb_nodes.setObjectName("label_txt_nb_nodes")
         self.formLayout_2.setWidget(2, QtGui.QFormLayout.LabelRole, self.label_txt_nb_nodes)
         self.spinBox_nb_nodes = QtGui.QSpinBox(self.layoutWidget)
-        self.spinBox_nb_nodes.setMaximum(200)
-        self.spinBox_nb_nodes.setProperty("value", 15)
+        self.spinBox_nb_nodes.setMaximum(1000)
+        self.spinBox_nb_nodes.setProperty("value", 26)
         self.spinBox_nb_nodes.setObjectName("spinBox_nb_nodes")
         self.formLayout_2.setWidget(2, QtGui.QFormLayout.FieldRole, self.spinBox_nb_nodes)
         self.label_txt_nb_beacons = QtGui.QLabel(self.layoutWidget)
         self.label_txt_nb_beacons.setObjectName("label_txt_nb_beacons")
         self.formLayout_2.setWidget(3, QtGui.QFormLayout.LabelRole, self.label_txt_nb_beacons)
         self.spinBox_nb_beacons = QtGui.QSpinBox(self.layoutWidget)
+        self.spinBox_nb_beacons.setMinimum(1)
         self.spinBox_nb_beacons.setProperty("value", 1)
         self.spinBox_nb_beacons.setObjectName("spinBox_nb_beacons")
         self.formLayout_2.setWidget(3, QtGui.QFormLayout.FieldRole, self.spinBox_nb_beacons)
@@ -79,16 +80,31 @@ class Ui_Dialog(object):
         self.label_txt_width.setObjectName("label_txt_width")
         self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.label_txt_width)
         self.spinBox_env_width = QtGui.QSpinBox(self.layoutWidget)
-        self.spinBox_env_width.setMaximum(300)
-        self.spinBox_env_width.setProperty("value", 300)
+        self.spinBox_env_width.setMaximum(530)
+        self.spinBox_env_width.setSingleStep(10)
+        self.spinBox_env_width.setProperty("value", 530)
         self.spinBox_env_width.setObjectName("spinBox_env_width")
         self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.spinBox_env_width)
         self.spinBox_env_length = QtGui.QSpinBox(self.layoutWidget)
-        self.spinBox_env_length.setMaximum(300)
-        self.spinBox_env_length.setProperty("value", 300)
+        self.spinBox_env_length.setMaximum(410)
+        self.spinBox_env_length.setSingleStep(10)
+        self.spinBox_env_length.setProperty("value", 410)
         self.spinBox_env_length.setObjectName("spinBox_env_length")
         self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.spinBox_env_length)
         self.verticalLayout.addLayout(self.formLayout)
+        self.horizontalLayoutWidget = QtGui.QWidget(Dialog)
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(210, 40, 160, 80))
+        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+        self.horizontalLayout = QtGui.QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label_txt_seed = QtGui.QLabel(self.horizontalLayoutWidget)
+        self.label_txt_seed.setObjectName("label_txt_seed")
+        self.horizontalLayout.addWidget(self.label_txt_seed)
+        self.doubleSpinBox_seed = QtGui.QDoubleSpinBox(self.horizontalLayoutWidget)
+        self.doubleSpinBox_seed.setProperty("value", 1.0)
+        self.doubleSpinBox_seed.setObjectName("doubleSpinBox_seed")
+        self.horizontalLayout.addWidget(self.doubleSpinBox_seed)
 
         self.retranslateUi(Dialog)
         QtCore.QObject.connect(self.buttonBox_dialog_init, QtCore.SIGNAL("accepted()"), Dialog.accept)
@@ -105,4 +121,5 @@ class Ui_Dialog(object):
         self.label_txt_env_size.setText(QtGui.QApplication.translate("Dialog", "Environment size:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_txt_length.setText(QtGui.QApplication.translate("Dialog", "Length:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_txt_width.setText(QtGui.QApplication.translate("Dialog", "Width:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_txt_seed.setText(QtGui.QApplication.translate("Dialog", "seed:", None, QtGui.QApplication.UnicodeUTF8))
 

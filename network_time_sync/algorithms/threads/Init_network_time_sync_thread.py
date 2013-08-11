@@ -30,6 +30,7 @@ class Init_network_time_sync_thread(QThread):
         self.env=env
         self.features_obj=features_obj
         
+        
 
     def run(self):
         new_passive_node_list=[]
@@ -69,6 +70,8 @@ class Init_network_time_sync_thread(QThread):
             # order matters!                                    #
             #####################################################
             active_node_list.sort(key=lambda tup: tup[0],reverse=False)
+            
+            
          
          
          

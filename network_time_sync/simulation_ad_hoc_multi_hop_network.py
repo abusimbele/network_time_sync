@@ -16,6 +16,7 @@ from env.objects.Obsticle import *
 
 from gui.window_main import *
 from gui.dialog_init import  *
+from gui.Env_button import  *
 
 import sys
 import random
@@ -23,9 +24,10 @@ import random
 from gui import dialog_init
 from gui.Draw_features import *
 from algorithms.Network_time_sync import Network_time_sync
-from tkinter.dialog import DIALOG_ICON
+#from tkinter.dialog import DIALOG_ICON
 import PySide
 from PySide import QtGui
+
 
 
 
@@ -34,8 +36,6 @@ MAX_TRANSMITTION_RANGE=150.0
 
 
 
-#SET SEED
-random.seed(1)
 
 
 
@@ -62,9 +62,15 @@ class simulation_ad_hoc_multi_hop_network(object):
     
     @staticmethod
     def delete_buttons():
-        for i in simulation_ad_hoc_multi_hop_network.buttons:
-            i.deleteLater()
-            simulation_ad_hoc_multi_hop_network.buttons=[]
+        
+        
+        
+#         for i in simulation_ad_hoc_multi_hop_network.buttons:
+#             i.deleteLater()
+#             simulation_ad_hoc_multi_hop_network.buttons=[]
+
+        for key in simulation_ad_hoc_multi_hop_network.env.env_objects:
+            simulation_ad_hoc_multi_hop_network.env.env_objects[key].gui_pushButton.deleteLater()
         
     
     
@@ -118,6 +124,10 @@ dialog_init =simulation_ad_hoc_multi_hop_network.dialog_init
 #INIT the environment trough the dialog choices
 def init_env():
     
+    #set seed
+    random.seed(simulation_ad_hoc_multi_hop_network.dialog_init.doubleSpinBox_seed.value())
+    
+    
     #clear scene:
     simulation_ad_hoc_multi_hop_network.window.graphicsView_sim.setScene(PySide.QtGui.QGraphicsScene())
     #ANTIALISING ON
@@ -126,19 +136,36 @@ def init_env():
     
     if (len(simulation_ad_hoc_multi_hop_network.buttons)>0):
         simulation_ad_hoc_multi_hop_network.delete_buttons()
+        
         #DISCONNECT old trigger and register at the end the new trigger with the new ENV-OBJECT!!!
         window.pushButton_crash_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.crash_node)
+        window.pushButton_delete_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.delete_node)
+        window.pushButton_undelete_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.undelete_node)
+        window.pushButton_input_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.input_node)
+        
         
          
         
+    
         
     env_length=dialog_init.spinBox_env_length.value()
     env_width=dialog_init.spinBox_env_width.value()
-    simulation_ad_hoc_multi_hop_network.env = Node_environment(env_length,env_width)
+    simulation_ad_hoc_multi_hop_network.env = Node_environment(simulation_ad_hoc_multi_hop_network.window,env_length,env_width)
     #Store for all classes
     env=simulation_ad_hoc_multi_hop_network.env
     
     
+    #Init features object
+    simulation_ad_hoc_multi_hop_network.features_obj=Draw_features()
+    simulation_ad_hoc_multi_hop_network.features_obj.set_window(window)
+    simulation_ad_hoc_multi_hop_network.features_obj.set_env(simulation_ad_hoc_multi_hop_network.env)
+    features_obj=simulation_ad_hoc_multi_hop_network.features_obj
+     
+    simulation_ad_hoc_multi_hop_network.sync_algorithm=Network_time_sync(window,dialog_init,simulation_ad_hoc_multi_hop_network.env,features_obj)
+    #print("1: ",simulation_ad_hoc_multi_hop_network.sync_algorithm)
+    
+    #register sny-algorithm
+    env.set_sync_algorithm(simulation_ad_hoc_multi_hop_network.sync_algorithm)
 
     
     
@@ -155,17 +182,29 @@ def init_env():
 #############################################################
 #set nodes to the envornment
     
+    
+    #get actual seed
+    
     #set beacons
     i=0
     for nb in range(dialog_init.spinBox_nb_beacons.value()):
         node_id=nb
-        x=random.randint(0,env_width)
-        y=random.randint(0,env_length)
+        x=random.randint(0,env_length)
+        y=random.randint(0,env_width)
+        
+
+        #OLD:
+        #pushButton_robot = QtGui.QPushButton(window.widget_simulation_window)
+        
+        #NEW:
+        pushButton_robot = Env_button(window.widget_simulation_window)
         
         
-        pushButton_robot = QtGui.QPushButton(window.widget_simulation_window)
+      
         pushButton_robot.setGeometry(QtCore.QRect(x, y, 60, 41))
         pushButton_robot.setText(str(node_id))
+        
+        
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/images/robot_beacon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         pushButton_robot.setIcon(icon)
@@ -208,7 +247,12 @@ def init_env():
         pushButton_robot.clicked.connect(node.view_special_parameter)
         
         
+        
+        #first beacon for focus
+        if(i==0):
+            first_beacon=node
        
+    
         i=i+1
     
     
@@ -220,7 +264,13 @@ def init_env():
         x=random.randint(0,env_width)
         y=random.randint(0,env_length)
         
-        pushButton_robot = QtGui.QPushButton(window.widget_simulation_window)
+        #OLD:
+        #pushButton_robot = QtGui.QPushButton(window.widget_simulation_window)
+        
+        #NEW:
+        pushButton_robot = Env_button(window.widget_simulation_window)
+        
+        
         pushButton_robot.setGeometry(QtCore.QRect(x, y, 60, 41))
         pushButton_robot.setText(str(node_id))
         icon = QtGui.QIcon()
@@ -229,6 +279,10 @@ def init_env():
         pushButton_robot.setIconSize(QtCore.QSize(30, 30))
         pushButton_robot.setObjectName("pushButton_robot_"+str(i))
         pushButton_robot.setVisible(True)
+        
+        
+    
+        
         
         #register for deletion
         simulation_ad_hoc_multi_hop_network.buttons.append(pushButton_robot)
@@ -258,27 +312,37 @@ def init_env():
         pushButton_robot.clicked.connect(node.view_parameter)
         pushButton_robot.clicked.connect(node.view_special_parameter)
         
+      
         i=i+1
         
         
-        #Init features object
-        simulation_ad_hoc_multi_hop_network.features_obj=Draw_features()
-        simulation_ad_hoc_multi_hop_network.features_obj.set_window(window)
-        simulation_ad_hoc_multi_hop_network.features_obj.set_env(simulation_ad_hoc_multi_hop_network.env)
-        features_obj=simulation_ad_hoc_multi_hop_network.features_obj
+
+    window.pushButton_start_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
         
-        simulation_ad_hoc_multi_hop_network.sync_algorithm=Network_time_sync(window,dialog_init,simulation_ad_hoc_multi_hop_network.env,features_obj)
-        window.pushButton_start_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
-        
+    
+    #input node CONNECT
+    window.pushButton_input_node.clicked.connect(simulation_ad_hoc_multi_hop_network.env.input_node)
         
     #crash a node CONNECT
     window.pushButton_crash_node.clicked.connect(simulation_ad_hoc_multi_hop_network.env.crash_node)
+    
+    #delete & undelete SIGNAL SLOT
+    window.pushButton_delete_node.clicked.connect(simulation_ad_hoc_multi_hop_network.env.delete_node)
+    window.pushButton_undelete_node.clicked.connect(simulation_ad_hoc_multi_hop_network.env.undelete_node)
     
     #INIT first neighborhood-tables
     env.create_neighborhood_sorted_list_ALL()
     
     env.set_features_obj(features_obj)
-        
+    
+    #set focus to beacon 0:
+    env.set_selected_item(first_beacon)
+    first_beacon.gui_pushButton.click()
+    
+    #register env to widget:
+    simulation_ad_hoc_multi_hop_network.window.widget_simulation_window.set_env(simulation_ad_hoc_multi_hop_network.env)
+
+       
         
         
 
@@ -355,6 +419,9 @@ dialog_init.buttonBox_dialog_init.accepted.connect(init_env)
 # window.graphicsView_sim.raise_()
 
 
+
+
+#print(window)
 window.show()
 sys.exit(app.exec_())
 
