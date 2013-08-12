@@ -151,6 +151,8 @@ def init_env():
         window.actionINIT.triggered.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.stop)
         window.actionINIT.triggered.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
         
+        window.slider_simulation_speed.valueChanged.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.change_speed)  
+        
         
          
         
@@ -391,6 +393,8 @@ def init_env():
     window.actionINIT.triggered.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
         
     #simulation_ad_hoc_multi_hop_network.sync_algorithm.myOwnSignal.connect(simulation_ad_hoc_multi_hop_network.env.slot_render)    
+    
+    window.slider_simulation_speed.valueChanged.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.change_speed)  
 
          
  ######################################

@@ -39,7 +39,17 @@ class Network_time_sync(object):
         self.timerScreen.setInterval(100) #1000 milliseconds = 1 second
         self.timerScreen.setSingleShot(False)
         self.timerScreen.timeout.connect(self.env.slot_render)
+        self.sim_speed=1
+    
+    
+    
+    def change_speed(self,speed):
+        if(speed==0):
+            return
+        self.speed=1000.0/(speed)
+        self.timerScreen.setInterval(self.speed)
         
+            
         
 
     def set_app(self,app):
@@ -64,7 +74,7 @@ class Network_time_sync(object):
         
            
     def start_iteration(self):
-        self.timerScreen.start(1)
+        self.timerScreen.start()
 # 
 #         try:
 #              self.iteration_thread.start()
