@@ -128,7 +128,23 @@ class Node(Environment_object):
         list.setModel(model)
         list.show()
           
+    def change_node_type(self):
+        if(self.is_beacon):
+            self.is_beacon=False
+            icon = QIcon()
+            icon.addPixmap(QPixmap(":/images/robot_passive.png"), QIcon.Normal, QIcon.Off)
+            self.gui_pushButton.setIcon(icon)
+            self.gateway=self
+            self.layer=-1
             
+        else:
+            icon = QIcon()
+            icon.addPixmap(QPixmap(":/images/robot_beacon.png"), QIcon.Normal, QIcon.Off)
+            self.gui_pushButton.setIcon(icon)
+            self.is_beacon=True  
+            self.gateway=self
+            self.layer=0
+  
         
  
     

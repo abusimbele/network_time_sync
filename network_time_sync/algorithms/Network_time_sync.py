@@ -36,10 +36,10 @@ class Network_time_sync(object):
         self.iteration_thread=Iteration_network_time_sync_thread(self.window,self.dialog,self.env,self.features_obj)
         self.app=None
         self.timerScreen = QTimer()
-        self.timerScreen.setInterval(100) #1000 milliseconds = 1 second
+        self.timerScreen.setInterval(25) #1000 milliseconds = 1 second
         self.timerScreen.setSingleShot(False)
         self.timerScreen.timeout.connect(self.env.slot_render)
-        self.sim_speed=1
+        self.sim_speed=25
     
     
     

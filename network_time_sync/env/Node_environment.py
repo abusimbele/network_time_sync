@@ -287,9 +287,11 @@ class Node_environment(QObject):
         
         node.coordinates=(x+v_x*time,y+v_y*time)
         
-        if(self.look_for_field_boundary(node)):
+        if(self.look_for_field_boundary(node) or self.look_for_collision(node)):
             node.coordinates=(x_old,y_old)
-            node.velocity_vector=(-node.velocity_vector[0],-node.velocity_vector[1])
+            self.set_node_random_velocity(node)
+            #node.velocity_vector=(-node.velocity_vector[0],-node.velocity_vector[1])
+            
             
         
         
@@ -343,7 +345,7 @@ class Node_environment(QObject):
     
     def look_for_field_boundary(self,node):
         
-        if((node.coordinates[0]+60)>=self.width or node.coordinates[0]<=0 or (node.coordinates[1]+41)>=self.length or  node.coordinates[1]<=0):
+        if((node.coordinates[0])>=self.width-8 or node.coordinates[0]<=0 or (node.coordinates[1])>=self.length or  node.coordinates[1]<=0):
             return True
         else:
             return False
@@ -359,6 +361,17 @@ class Node_environment(QObject):
             self.selected_item.view_parameter()
             self.selected_item.view_special_parameter()
         self.features_obj.draw_trans_range()
+        
+    
+    def change_selected_node_type(self):
+        self.get_selected_item().change_node_type()
+        
+        self.sync_algorithm.gateway_lost()
+        self.selected_item.view_parameter()
+        self.selected_item.view_special_parameter()
+        self.selected_item.set_items_to_neighborhood_sorted_list_view()
+        self.features_obj.draw_trans_range()  
+        
         
     
         

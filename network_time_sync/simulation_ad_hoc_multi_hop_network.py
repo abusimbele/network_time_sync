@@ -153,6 +153,8 @@ def init_env():
         
         window.slider_simulation_speed.valueChanged.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.change_speed)  
         
+        window.checkBox_beacon.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.change_selected_node_type)
+        
         
          
         
@@ -394,7 +396,9 @@ def init_env():
         
     #simulation_ad_hoc_multi_hop_network.sync_algorithm.myOwnSignal.connect(simulation_ad_hoc_multi_hop_network.env.slot_render)    
     
-    window.slider_simulation_speed.valueChanged.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.change_speed)  
+    window.slider_simulation_speed.valueChanged.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.change_speed)
+    
+    window.checkBox_beacon.clicked.connect(simulation_ad_hoc_multi_hop_network.env.change_selected_node_type)
 
          
  ######################################
