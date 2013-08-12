@@ -34,8 +34,18 @@ class Network_time_sync(object):
         self.features_obj=features_obj
         self.init_started=False
         self.iteration_thread=Iteration_network_time_sync_thread(self.window,self.dialog,self.env,self.features_obj)
-    
+        self.app=None
+        self.timerScreen = QTimer()
+        self.timerScreen.setInterval(100) #1000 milliseconds = 1 second
+        self.timerScreen.setSingleShot(False)
+        self.timerScreen.timeout.connect(self.env.slot_render)
+        
+        
 
+    def set_app(self,app):
+        self.app=app
+        
+        
 
     def initial_layer_creation(self):
         self.init_ts_thread=Init_network_time_sync_thread(self.window,self.dialog,self.env,self.features_obj)
@@ -54,11 +64,12 @@ class Network_time_sync(object):
         
            
     def start_iteration(self):
-
-        try:
-             self.iteration_thread.start()
-        except:
-            pass
+        self.timerScreen.start(1)
+# 
+#         try:
+#              self.iteration_thread.start()
+#         except:
+#             pass
         
         
                   

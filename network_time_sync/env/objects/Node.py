@@ -89,7 +89,7 @@ class Node(Environment_object):
            
            
         #show max-trans-circle
-        #self.env_ref.features_obj.draw_trans_range()
+        self.env_ref.features_obj.draw_trans_range()
            
            
            

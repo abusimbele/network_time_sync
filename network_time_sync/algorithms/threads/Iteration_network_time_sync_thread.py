@@ -18,11 +18,15 @@ from own_math.Calculate import *
 
 
 
+
 class Iteration_network_time_sync_thread(QThread):
+    
+    
+    
     
     #static
     features_obj=None
-    
+    myOwnSignal=Signal()
 
     
     def __init__(self,window,dialog,env,features_obj):
@@ -30,23 +34,32 @@ class Iteration_network_time_sync_thread(QThread):
         self.window=window
         self.dialog=dialog
         self.env=env
+        self.app=None
         self.features_obj=features_obj
+        self.myOwnSignal.connect(self.env.slot_render)
         
     def pause_sim(self):
         print("PAUSE")
          
+    
+    def set_app(self,app):
+        self.app=app    
+        print("Thread: ",self.app)
         
 
+    
+    def fire_signal_to_render(self):
+        self.myOwnSignal.emit()
+        
+    
+    
     def run(self):
+
         while(True):
-            self.env.move_all_nodes()
+            #DIRECT method call for synchronization! mega brain :)
             self.sleep(1)
-            self.env.create_neighborhood_sorted_list_ALL()
-            self.env.sync_algorithm.gateway_lost()
-            #self.env.selected_item.set_items_to_neighborhood_sorted_list_view()
-            #self.env.selected_item.view_parameter()
-            #self.env.selected_item.view_special_parameter()
-            self.env.features_obj.draw_trans_range()
+            self.fire_signal_to_render()
+            
            
             
         

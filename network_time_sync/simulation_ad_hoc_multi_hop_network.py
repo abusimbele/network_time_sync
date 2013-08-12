@@ -59,6 +59,7 @@ class simulation_ad_hoc_multi_hop_network(object):
     dialog_init=None
     buttons=[]
     features_obj=None
+    app=None
     
     @staticmethod
     def delete_buttons():
@@ -89,6 +90,8 @@ class MyDialog(QtGui.QDialog, Ui_Dialog):
 
 
 app = QtGui.QApplication(sys.argv)
+simulation_ad_hoc_multi_hop_network.app= app
+
 simulation_ad_hoc_multi_hop_network.window =  MyApplication()
 window = simulation_ad_hoc_multi_hop_network.window
 
@@ -142,9 +145,10 @@ def init_env():
         window.pushButton_delete_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.delete_node)
         window.pushButton_undelete_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.undelete_node)
         window.pushButton_input_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.input_node)
-        window.pushButton_pause_simulation.clicked.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.iteration_thread.pause_sim)
+        window.pushButton_pause_simulation.clicked.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.stop)
         window.pushButton_start_simulation.clicked.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.start_iteration)
         
+        window.actionINIT.triggered.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.stop)
         window.actionINIT.triggered.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
         
         
@@ -166,10 +170,14 @@ def init_env():
     features_obj=simulation_ad_hoc_multi_hop_network.features_obj
      
     simulation_ad_hoc_multi_hop_network.sync_algorithm=Network_time_sync(window,dialog_init,simulation_ad_hoc_multi_hop_network.env,features_obj)
+    simulation_ad_hoc_multi_hop_network.sync_algorithm.set_app(simulation_ad_hoc_multi_hop_network.app)
+    
     #print("1: ",simulation_ad_hoc_multi_hop_network.sync_algorithm)
     
-    #register sny-algorithm
+    #register syc-algorithm
     env.set_sync_algorithm(simulation_ad_hoc_multi_hop_network.sync_algorithm)
+    
+    
 
     
     
@@ -376,11 +384,13 @@ def init_env():
     #register env to widget:
     simulation_ad_hoc_multi_hop_network.window.widget_simulation_window.set_env(simulation_ad_hoc_multi_hop_network.env)
 
-    window.pushButton_pause_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.iteration_thread.pause_sim)    
+    window.pushButton_pause_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.stop)   
+    
+    window.actionINIT.triggered.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.stop)  
     
     window.actionINIT.triggered.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
         
-        
+    #simulation_ad_hoc_multi_hop_network.sync_algorithm.myOwnSignal.connect(simulation_ad_hoc_multi_hop_network.env.slot_render)    
 
          
  ######################################
@@ -456,12 +466,14 @@ dialog_init.buttonBox_dialog_init.accepted.connect(init_env)
 # window.graphicsView_sim.raise_()
 
 
-
+print(app)
 
 #print(window)
 window.show()
 #QCoreApplication.exit(0)
 sys.exit(app.exec_())
+#close Thread
+simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.destroy()
 
 
 

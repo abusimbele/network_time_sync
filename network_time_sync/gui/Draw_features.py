@@ -18,9 +18,12 @@ class Draw_features(object):
         self.env    =   None
         self.window =   None
         self.scene  =   None
+        self.scene=QGraphicsScene()
     
     def set_window(self,window):
         self.window=window
+        self.window.graphicsView_sim.setScene(self.scene)
+        self.window.graphicsView_sim.setSceneRect(QtCore.QRect(0, 0, 575, 400))
         
     def set_env(self,env):
         self.env=env
@@ -32,9 +35,13 @@ class Draw_features(object):
         
         #BAD, buttons behind view!!!
         #self.window.graphicsView_sim.raise_()
+        
+        #self.scene.clear()
         self.scene=QGraphicsScene()
-        self.window.graphicsView_sim.setScene(self.scene)  
-        self.window.graphicsView_sim.setSceneRect(QtCore.QRect(0, 0, 575, 400))
+        self.window.graphicsView_sim.setScene(self.scene)
+        
+         
+        
         pen = QtGui.QPen(QtCore.Qt.gray, 2, QtCore.Qt.DotLine)
 
         

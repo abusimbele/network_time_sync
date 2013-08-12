@@ -17,7 +17,7 @@ import math
 #from simulation_ad_hoc_multi_hop_network import simulation_ad_hoc_multi_hop_network
 
 
-class Node_environment(object):
+class Node_environment(QObject):
     
     #static
     button_list=[]
@@ -27,6 +27,7 @@ class Node_environment(object):
 
     #Constructor
     def __init__(self,window, length, width):
+        super(Node_environment,self).__init__(None)
         self.length=length
         self.width=width
         self.selected_item=None
@@ -105,16 +106,19 @@ class Node_environment(object):
             self.selected_item.gateway=self.selected_item
             
             if(self.selected_item.is_beacon):
-                self.selected_item.layer=0
+                #self.selected_item.layer=0
+                pass
             else:
                 self.selected_item.layer=-1   
 
         else:
             pass
+        self.create_neighborhood_sorted_list_ALL()
         self.sync_algorithm.gateway_lost()
-        self.selected_item.view_parameter()
-        self.selected_item.view_special_parameter()
-        self.selected_item.set_items_to_neighborhood_sorted_list_view()
+        if(self.selected_item!=None):
+            self.selected_item.view_parameter()
+            self.selected_item.view_special_parameter()
+            self.selected_item.set_items_to_neighborhood_sorted_list_view()
         self.features_obj.draw_trans_range()
         
         
@@ -343,6 +347,18 @@ class Node_environment(object):
             return True
         else:
             return False
+        
+        
+    def slot_render(self):
+    
+        self.move_all_nodes()
+        self.create_neighborhood_sorted_list_ALL()
+        self.sync_algorithm.gateway_lost()
+        if(self.selected_item!=None):
+            self.selected_item.set_items_to_neighborhood_sorted_list_view()
+            self.selected_item.view_parameter()
+            self.selected_item.view_special_parameter()
+        self.features_obj.draw_trans_range()
         
     
         
