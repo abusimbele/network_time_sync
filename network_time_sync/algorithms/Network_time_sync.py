@@ -9,6 +9,8 @@ from PySide.QtCore import *
 from env.Node_environment import *
 from gui.Draw_features import *
 from algorithms.threads.Init_network_time_sync_thread import *
+from algorithms.threads.Iteration_network_time_sync_thread import *
+
 from env.objects.Node import *
 import random
 
@@ -31,21 +33,17 @@ class Network_time_sync(object):
         self.env=env
         self.features_obj=features_obj
         self.init_started=False
+        self.iteration_thread=Iteration_network_time_sync_thread(self.window,self.dialog,self.env,self.features_obj)
     
 
 
     def initial_layer_creation(self):
-
-        
         self.init_ts_thread=Init_network_time_sync_thread(self.window,self.dialog,self.env,self.features_obj)
-        
-       
+
         try:
              self.init_ts_thread.start()
         except:
             pass
-        
-        
         
         #View with circle at focus-node
         #self.features_obj.draw_graph() 
@@ -54,11 +52,14 @@ class Network_time_sync(object):
         self.features_obj.draw_trans_range()
         
         
-         
-        self.init_started=True
-        
            
+    def start_iteration(self):
 
+        try:
+             self.iteration_thread.start()
+        except:
+            pass
+        
         
                   
     def gateway_lost(self):
@@ -95,7 +96,7 @@ class Network_time_sync(object):
                     
                     for i in self.env.env_objects[key].neighborhood_sorted_list:
                          
-                        if(i[2].layer!=-1):
+                        if(not(i[2].layer==-1)):
                     
                             self.env.env_objects[key].gateway=i[2]
                             self.env.env_objects[key].layer= self.env.env_objects[key].gateway.layer+1

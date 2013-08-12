@@ -7,7 +7,7 @@ Created on 24.07.2013
 class Environment_object(object):
     
 
-    def __init__(self,string_code_type,coordinates,velocity_vector):
+    def __init__(self,string_code_type,coordinates,velocity_vector,velocity_vector_length):
         
         self.env_id              =   -1
         self.window_ref          =   None
@@ -15,6 +15,7 @@ class Environment_object(object):
         self.string_code_type=string_code_type
         self.coordinates=coordinates
         self.velocity_vector=velocity_vector
+        self.velocity_vector_length=velocity_vector_length
 
     
         

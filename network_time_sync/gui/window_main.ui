@@ -334,6 +334,7 @@
     <property name="title">
      <string>simulation</string>
     </property>
+    <addaction name="actionNewSim"/>
     <addaction name="actionINIT"/>
    </widget>
    <addaction name="menuSimulation"/>
@@ -358,6 +359,11 @@
   <action name="actionHelp">
    <property name="text">
     <string>Help</string>
+   </property>
+  </action>
+  <action name="actionNewSim">
+   <property name="text">
+    <string>New</string>
    </property>
   </action>
  </widget>

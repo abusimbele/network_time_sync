@@ -142,6 +142,10 @@ def init_env():
         window.pushButton_delete_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.delete_node)
         window.pushButton_undelete_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.undelete_node)
         window.pushButton_input_node.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.input_node)
+        window.pushButton_pause_simulation.clicked.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.iteration_thread.pause_sim)
+        window.pushButton_start_simulation.clicked.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.start_iteration)
+        
+        window.actionINIT.triggered.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
         
         
          
@@ -187,10 +191,23 @@ def init_env():
     
     #set beacons
     i=0
+    security_cap= security_cap=0
     for nb in range(dialog_init.spinBox_nb_beacons.value()):
         node_id=nb
-        x=random.randint(0,env_length)
-        y=random.randint(0,env_width)
+        
+        while(True):
+            x=random.randint(0,env_width-60)
+            y=random.randint(0,env_length-40)
+            
+            if(not env.look_for_collision_xy(x,y)):
+                break
+            security_cap= security_cap+1
+            if(security_cap>100000):
+                x=0
+                y=0
+                break
+            
+            
         
 
         #OLD:
@@ -227,7 +244,7 @@ def init_env():
         
 
         
-        node = Node(node_id,0,True,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx.value(),dialog_init.doubleSpinBox_vy.value()),pushButton_robot)
+        node = Node(node_id,0,True,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx.value(),dialog_init.doubleSpinBox_vy.value()),dialog_init.doubleSpinBox_v_length.value(),pushButton_robot)
         env.set_env_object(node)
         
         #after env-placement, to get the wright ENV_ID
@@ -252,6 +269,8 @@ def init_env():
         if(i==0):
             first_beacon=node
        
+       
+        env.set_node_random_velocity(node)
     
         i=i+1
     
@@ -261,8 +280,22 @@ def init_env():
     for nb in range(dialog_init.spinBox_nb_nodes.value()):
         node_id=nb+dialog_init.spinBox_nb_beacons.value()
         
-        x=random.randint(0,env_width)
-        y=random.randint(0,env_length)
+        
+        security_cap=0
+        while(True):
+            x=random.randint(0,env_width-60)
+            y=random.randint(0,env_length-40)
+            
+            if(not env.look_for_collision_xy(x,y)):
+                break
+            security_cap= security_cap+1
+            if(security_cap>100000):
+                x=0
+                y=0
+                break
+            
+        
+        
         
         #OLD:
         #pushButton_robot = QtGui.QPushButton(window.widget_simulation_window)
@@ -297,7 +330,7 @@ def init_env():
 #         QPushButton:checked {\
 #         background: rgb(105, 105, 105);}")
         
-        node = Node(node_id,-1,False,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx.value(),dialog_init.doubleSpinBox_vy.value()),pushButton_robot)
+        node = Node(node_id,-1,False,MAX_TRANSMITTION_RANGE,(x,y),(dialog_init.doubleSpinBox_vx.value(),dialog_init.doubleSpinBox_vy.value()),dialog_init.doubleSpinBox_v_length.value(),pushButton_robot)
         env.set_env_object(node)
         
         #after env-placement, to get the wright ENV_ID
@@ -312,12 +345,13 @@ def init_env():
         pushButton_robot.clicked.connect(node.view_parameter)
         pushButton_robot.clicked.connect(node.view_special_parameter)
         
-      
+        env.set_node_random_velocity(node)
+        
         i=i+1
         
         
 
-    window.pushButton_start_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
+    window.pushButton_start_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.start_iteration)
         
     
     #input node CONNECT
@@ -342,7 +376,9 @@ def init_env():
     #register env to widget:
     simulation_ad_hoc_multi_hop_network.window.widget_simulation_window.set_env(simulation_ad_hoc_multi_hop_network.env)
 
-       
+    window.pushButton_pause_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.iteration_thread.pause_sim)    
+    
+    window.actionINIT.triggered.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
         
         
 
@@ -394,7 +430,8 @@ def poo():
 #ACTIONS
 
 #Main-Window:
-window.actionINIT.triggered.connect(dialog_init.show)
+window.actionNewSim.triggered.connect(dialog_init.show)
+
 
 
 #INIT-Dialog:
@@ -423,6 +460,7 @@ dialog_init.buttonBox_dialog_init.accepted.connect(init_env)
 
 #print(window)
 window.show()
+#QCoreApplication.exit(0)
 sys.exit(app.exec_())
 
 

@@ -70,7 +70,7 @@ class Init_network_time_sync_thread(QThread):
             # order matters!                                    #
             #####################################################
             active_node_list.sort(key=lambda tup: tup[0],reverse=False)
-            
+        self.terminate()
             
          
          

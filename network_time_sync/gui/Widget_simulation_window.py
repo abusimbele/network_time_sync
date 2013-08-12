@@ -42,10 +42,21 @@ class Widget_simulation_window(QtGui.QWidget):
         btn.move(e.pos())
         
         node.coordinates=((e.pos().x(),e.pos().y()))
+        if(node.is_beacon):
+            pass
+        else:
+            node.layer=-1
+        node.gateway=node
         
         
-        node.view_special_parameter()
-        node.view_parameter()
+        
+
+        self.env.create_neighborhood_sorted_list_ALL()
+        self.env.sync_algorithm.gateway_lost()
+        self.env.selected_item.set_items_to_neighborhood_sorted_list_view()
+        self.env.selected_item.view_parameter()
+        self.env.selected_item.view_special_parameter()
+        self.env.features_obj.draw_trans_range()
         
         e.accept()
         

@@ -20,11 +20,11 @@ class Node(Environment_object):
     
     
     
-    def __init__(self, mac_id,layer,is_beacon,MAX_TRANSMITTION_RANGE,coordinates,velocity_vector,gui_pushButton):
+    def __init__(self, mac_id,layer,is_beacon,MAX_TRANSMITTION_RANGE,coordinates,velocity_vector,velocity_vector_length,gui_pushButton):
         
         STRING_CODE_TYPE    =   "X" 
         
-        Environment_object.__init__(self,STRING_CODE_TYPE,coordinates,velocity_vector)
+        Environment_object.__init__(self,STRING_CODE_TYPE,coordinates,velocity_vector,velocity_vector_length)
         
         self.node_state=Node_state()
         self.mac_id=mac_id
@@ -89,7 +89,7 @@ class Node(Environment_object):
            
            
         #show max-trans-circle
-        self.env_ref.features_obj.draw_trans_range()
+        #self.env_ref.features_obj.draw_trans_range()
            
            
            

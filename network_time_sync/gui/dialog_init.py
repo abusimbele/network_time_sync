@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Work\Desktop\dialog_init.ui'
 #
-# Created: Sat Aug 10 00:13:31 2013
+# Created: Mon Aug 12 13:54:58 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,7 +19,7 @@ class Ui_Dialog(object):
         self.buttonBox_dialog_init.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
         self.buttonBox_dialog_init.setObjectName("buttonBox_dialog_init")
         self.layoutWidget = QtGui.QWidget(Dialog)
-        self.layoutWidget.setGeometry(QtCore.QRect(30, 40, 162, 225))
+        self.layoutWidget.setGeometry(QtCore.QRect(30, 40, 162, 232))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout = QtGui.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -52,16 +52,22 @@ class Ui_Dialog(object):
         self.formLayout_2.setWidget(3, QtGui.QFormLayout.FieldRole, self.spinBox_nb_beacons)
         self.label_txt_vx = QtGui.QLabel(self.layoutWidget)
         self.label_txt_vx.setObjectName("label_txt_vx")
-        self.formLayout_2.setWidget(4, QtGui.QFormLayout.LabelRole, self.label_txt_vx)
+        self.formLayout_2.setWidget(5, QtGui.QFormLayout.LabelRole, self.label_txt_vx)
         self.doubleSpinBox_vx = QtGui.QDoubleSpinBox(self.layoutWidget)
         self.doubleSpinBox_vx.setObjectName("doubleSpinBox_vx")
-        self.formLayout_2.setWidget(4, QtGui.QFormLayout.FieldRole, self.doubleSpinBox_vx)
+        self.formLayout_2.setWidget(5, QtGui.QFormLayout.FieldRole, self.doubleSpinBox_vx)
         self.label_txt_vy = QtGui.QLabel(self.layoutWidget)
         self.label_txt_vy.setObjectName("label_txt_vy")
-        self.formLayout_2.setWidget(5, QtGui.QFormLayout.LabelRole, self.label_txt_vy)
+        self.formLayout_2.setWidget(6, QtGui.QFormLayout.LabelRole, self.label_txt_vy)
         self.doubleSpinBox_vy = QtGui.QDoubleSpinBox(self.layoutWidget)
         self.doubleSpinBox_vy.setObjectName("doubleSpinBox_vy")
-        self.formLayout_2.setWidget(5, QtGui.QFormLayout.FieldRole, self.doubleSpinBox_vy)
+        self.formLayout_2.setWidget(6, QtGui.QFormLayout.FieldRole, self.doubleSpinBox_vy)
+        self.label_txt_v_length = QtGui.QLabel(self.layoutWidget)
+        self.label_txt_v_length.setObjectName("label_txt_v_length")
+        self.formLayout_2.setWidget(4, QtGui.QFormLayout.LabelRole, self.label_txt_v_length)
+        self.doubleSpinBox_v_length = QtGui.QDoubleSpinBox(self.layoutWidget)
+        self.doubleSpinBox_v_length.setObjectName("doubleSpinBox_v_length")
+        self.formLayout_2.setWidget(4, QtGui.QFormLayout.FieldRole, self.doubleSpinBox_v_length)
         self.verticalLayout.addLayout(self.formLayout_2)
         self.label_txt_env_size = QtGui.QLabel(self.layoutWidget)
         font = QtGui.QFont()
@@ -118,6 +124,7 @@ class Ui_Dialog(object):
         self.label_txt_nb_beacons.setText(QtGui.QApplication.translate("Dialog", "#beacons:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_txt_vx.setText(QtGui.QApplication.translate("Dialog", "v_x:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_txt_vy.setText(QtGui.QApplication.translate("Dialog", "v_y:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_txt_v_length.setText(QtGui.QApplication.translate("Dialog", "v_length", None, QtGui.QApplication.UnicodeUTF8))
         self.label_txt_env_size.setText(QtGui.QApplication.translate("Dialog", "Environment size:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_txt_length.setText(QtGui.QApplication.translate("Dialog", "Length:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_txt_width.setText(QtGui.QApplication.translate("Dialog", "Width:", None, QtGui.QApplication.UnicodeUTF8))

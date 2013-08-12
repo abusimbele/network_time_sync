@@ -2,26 +2,24 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Work\Desktop\window_main.ui'
 #
-# Created: Sat Aug 10 00:00:23 2013
+# Created: Mon Aug 12 13:54:57 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
 
 from PySide import QtCore, QtGui
 from gui.Widget_simulation_window import *
-#from simulation_ad_hoc_multi_hop_network import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
-        
-        
-        
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        
-#         #OLD:
+
+
+
+         #OLD:
 #         self.widget_simulation_window = QtGui.QWidget(self.centralwidget)
 #         self.widget_simulation_window.setGeometry(QtCore.QRect(0, 0, 600, 450))
 #         self.widget_simulation_window.setObjectName("widget_simulation_window")
@@ -40,14 +38,8 @@ class Ui_MainWindow(object):
         
         
         
-#         self.pushButton_robot_1 = QtGui.QPushButton(self.widget_simulation_window)
-#         self.pushButton_robot_1.setGeometry(QtCore.QRect(0, 0, 41, 41))
-#         self.pushButton_robot_1.setText("")
-#         icon = QtGui.QIcon()
-#         icon.addPixmap(QtGui.QPixmap(":/images/robot_beacon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-#         self.pushButton_robot_1.setIcon(icon)
-#         self.pushButton_robot_1.setIconSize(QtCore.QSize(30, 30))
-#         self.pushButton_robot_1.setObjectName("pushButton_robot_1")
+
+
         self.formLayoutWidget = QtGui.QWidget(self.centralwidget)
         self.formLayoutWidget.setGeometry(QtCore.QRect(590, 10, 201, 171))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
@@ -191,8 +183,11 @@ class Ui_MainWindow(object):
         self.actionAbout.setObjectName("actionAbout")
         self.actionHelp = QtGui.QAction(MainWindow)
         self.actionHelp.setObjectName("actionHelp")
+        self.actionNewSim = QtGui.QAction(MainWindow)
+        self.actionNewSim.setObjectName("actionNewSim")
         self.menuAcoustic_Network_Simulation.addAction(self.actionHelp)
         self.menuAcoustic_Network_Simulation.addAction(self.actionAbout)
+        self.menuSimulation.addAction(self.actionNewSim)
         self.menuSimulation.addAction(self.actionINIT)
         self.menubar.addAction(self.menuSimulation.menuAction())
         self.menubar.addAction(self.menuAcoustic_Network_Simulation.menuAction())
@@ -227,13 +222,6 @@ class Ui_MainWindow(object):
         self.actionINIT.setText(QtGui.QApplication.translate("MainWindow", "INIT", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAbout.setText(QtGui.QApplication.translate("MainWindow", "About", None, QtGui.QApplication.UnicodeUTF8))
         self.actionHelp.setText(QtGui.QApplication.translate("MainWindow", "Help", None, QtGui.QApplication.UnicodeUTF8))
-        
-        
-        
-        
-        ##NEW
-        
-
-        
+        self.actionNewSim.setText(QtGui.QApplication.translate("MainWindow", "New", None, QtGui.QApplication.UnicodeUTF8))
 
 import images.robots_rc

@@ -35,7 +35,7 @@
      <x>30</x>
      <y>40</y>
      <width>162</width>
-     <height>225</height>
+     <height>232</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -91,25 +91,35 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <widget class="QLabel" name="label_txt_vx">
         <property name="text">
          <string>v_x:</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="5" column="1">
        <widget class="QDoubleSpinBox" name="doubleSpinBox_vx"/>
       </item>
-      <item row="5" column="0">
+      <item row="6" column="0">
        <widget class="QLabel" name="label_txt_vy">
         <property name="text">
          <string>v_y:</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
+      <item row="6" column="1">
        <widget class="QDoubleSpinBox" name="doubleSpinBox_vy"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_txt_v_length">
+        <property name="text">
+         <string>v_length</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_v_length"/>
       </item>
      </layout>
     </item>

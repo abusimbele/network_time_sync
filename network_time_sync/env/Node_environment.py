@@ -10,6 +10,9 @@ from env.objects.Node_state import Node_state
 from env.objects.Node import *
 from gui.dialog_init import  *
 from gui.Env_button import  *
+import random
+import math
+
 
 #from simulation_ad_hoc_multi_hop_network import simulation_ad_hoc_multi_hop_network
 
@@ -41,9 +44,10 @@ class Node_environment(object):
         self.sync_algorithm=sync_algorithm    
         
     def set_env_object(self,environmental_object):  
-        #self.env_objects.append(environmental_object)
+        
         env_id=self.get_env_id()
         self.env_objects[env_id]=environmental_object
+        
         #register env_id to env_object
         environmental_object.set_env_id(env_id)
         
@@ -77,9 +81,11 @@ class Node_environment(object):
         
     def crash_node(self):
         
-        
-        
+        #print("COLL: ",self.look_for_collision(self.selected_item))
+        #print("Field: ",self.look_for_field_boundary(self.selected_item))
+       
 
+        
         
         if(self.selected_item!=None):
             if(self.selected_item.node_state.state_name==Node_state.STATE_CRASHED):
@@ -102,22 +108,14 @@ class Node_environment(object):
                 self.selected_item.layer=0
             else:
                 self.selected_item.layer=-1   
-            
-            
 
-            
-            
-            
-            
-            #self.create_neighborhood_sorted_list_ALL()
         else:
             pass
-        
         self.sync_algorithm.gateway_lost()
-        self.features_obj.draw_trans_range()
         self.selected_item.view_parameter()
         self.selected_item.view_special_parameter()
         self.selected_item.set_items_to_neighborhood_sorted_list_view()
+        self.features_obj.draw_trans_range()
         
         
   
@@ -164,6 +162,8 @@ class Node_environment(object):
             
                 
             else:
+                self.sync_algorithm.gateway_lost()
+                self.features_obj.draw_trans_range()
                 pass
             
         else:
@@ -206,6 +206,12 @@ class Node_environment(object):
         else:
             pass
         
+        self.sync_algorithm.gateway_lost()
+        self.selected_item.view_parameter()
+        self.selected_item.view_special_parameter()
+        self.selected_item.set_items_to_neighborhood_sorted_list_view()
+        self.features_obj.draw_trans_range()
+        
     
     
     def create_neighborhood_sorted_list_ALL(self):
@@ -223,10 +229,27 @@ class Node_environment(object):
         #pushButton_robot = QtGui.QPushButton(self.window.widget_simulation_window)
         
         #NEW:
+        
+        security_cap=0
+        while(True):
+            
+            x=random.randint(0,self.width-60)
+            y=random.randint(0,self.length-40)
+            
+            if(not self.look_for_collision_xy(x,y)):
+                break
+            security_cap= security_cap+1
+            if(security_cap>100000):
+                x=0
+                y=0
+                break
+        
+        
+        
         pushButton_robot = Env_button(self.window.widget_simulation_window)
         
         pushButton_robot = QPushButton(self.window.widget_simulation_window)
-        pushButton_robot.setGeometry(QRect(300, 300, 60, 41))
+        pushButton_robot.setGeometry(QRect(x, y, 60, 41))
         pushButton_robot.setText(str(id))
         icon = QIcon()
         icon.addPixmap(QPixmap(":/images/robot_passive.png"), QIcon.Normal, QIcon.Off)
@@ -235,7 +258,7 @@ class Node_environment(object):
         pushButton_robot.setObjectName("pushButton_robot_"+str(id))
         pushButton_robot.setVisible(True)
         #INSERT WITH layer -> 10000
-        node=Node(self.id,-1,False,MAX_TRANSMITTION_RANGE,(300,300),(0,0),pushButton_robot)
+        node=Node(self.id,-1,False,MAX_TRANSMITTION_RANGE,(x,y),(0,0),0,pushButton_robot)
         node.set_env_ref(self)
         node.set_window_ref(self.window)
         self.set_env_object(node)     
@@ -245,6 +268,93 @@ class Node_environment(object):
         
         #register button:
         #simulation_ad_hoc_multi_hop_network.buttons.append(pushButton_robot)
+        
+        
+    #move the node and it`s button to the new coordinates for a given time-interval     
+    def move_node(self,node,time):
+        
+        x_old   =   node.coordinates[0]
+        y_old   =   node.coordinates[1]
+        
+        x   =   node.coordinates[0]
+        y   =   node.coordinates[1]
+        v_x =   node.velocity_vector[0]
+        v_y =   node.velocity_vector[1]
+        
+        node.coordinates=(x+v_x*time,y+v_y*time)
+        
+        if(self.look_for_field_boundary(node)):
+            node.coordinates=(x_old,y_old)
+            node.velocity_vector=(-node.velocity_vector[0],-node.velocity_vector[1])
+            
+        
+        
+        
+        self.move_node_button(node)
+        
+        
+    def move_node_button(self,node):
+        node.gui_pushButton.move(node.coordinates[0],node.coordinates[1])
+        
+    
+    def move_all_nodes(self):
+        for key in self.env_objects:
+            self.move_node(self.env_objects[key], 1)
+        
+        
+        
+    def set_node_random_velocity(self,node,rnd=False):
+        length=node.velocity_vector_length
+        alpha=random.random()*0.5*math.pi
+        
+        v_x =   math.cos(alpha)*length *(-1)**(random.randint(0,1))   
+        v_y =   math.sin(alpha)*length *(-1)**(random.randint(0,1)) 
+
+        node.velocity_vector=(v_x,v_y)
+        
+        
+    def look_for_collision_xy(self,node_x,node_y,node=None):
+        
+        
+        
+        for key in self.env_objects:
+            if(self.env_objects[key]!=node):
+                if(abs(self.env_objects[key].coordinates[0]-node_x)<60 and abs(self.env_objects[key].coordinates[1]-node_y)<41):
+                    #print(self.env_objects[key].mac_id,self.env_objects[key].coordinates[0],self.env_objects[key].coordinates[1])
+                    return True
+                    
+                else: 
+                    pass
+            
+        return False
+    
+    
+    def look_for_collision(self,node):
+        return self.look_for_collision_xy(node.coordinates[0],node.coordinates[1],node)
+        
+        
+            
+        return False
+    
+    
+    def look_for_field_boundary(self,node):
+        
+        if((node.coordinates[0]+60)>=self.width or node.coordinates[0]<=0 or (node.coordinates[1]+41)>=self.length or  node.coordinates[1]<=0):
+            return True
+        else:
+            return False
+        
+    
+        
+       
+    
+    
+        
+        
+        
+        
+        
+        
         
            
         
