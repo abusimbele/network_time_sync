@@ -17,7 +17,7 @@ class Widget_simulation_window(QtGui.QWidget):
         self.show()
         
         
-        print(parent)
+   
 
 
     def set_env(self,env):

@@ -9,7 +9,7 @@ from PySide.QtCore import *
 from env.Node_environment import *
 from gui.Draw_features import *
 from algorithms.threads.Init_network_time_sync_thread import *
-from algorithms.threads.Iteration_network_time_sync_thread import *
+
 
 from env.objects.Node import *
 import random
@@ -33,7 +33,6 @@ class Network_time_sync(object):
         self.env=env
         self.features_obj=features_obj
         self.init_started=False
-        self.iteration_thread=Iteration_network_time_sync_thread(self.window,self.dialog,self.env,self.features_obj)
         self.app=None
         self.timerScreen = QTimer()
         self.timerScreen.setInterval(25) #1000 milliseconds = 1 second
@@ -75,12 +74,7 @@ class Network_time_sync(object):
            
     def start_iteration(self):
         self.timerScreen.start()
-# 
-#         try:
-#              self.iteration_thread.start()
-#         except:
-#             pass
-        
+
         
                   
     def gateway_lost(self):

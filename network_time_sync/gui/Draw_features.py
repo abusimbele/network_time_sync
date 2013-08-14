@@ -33,6 +33,11 @@ class Draw_features(object):
     def draw_graph(self):
     
         
+        
+        
+        
+        
+        
         #BAD, buttons behind view!!!
         #self.window.graphicsView_sim.raise_()
         
@@ -48,7 +53,22 @@ class Draw_features(object):
 
         #Draw Graph
         for key in self.env.env_objects:
+            
+            
+            
+            
             node=self.env.env_objects[key]        
+            
+            
+            if(self.env.connection_to_beacon(node)):
+                 pen = QtGui.QPen(QtCore.Qt.green, 2, QtCore.Qt.DotLine)
+            else:
+                 pen = QtGui.QPen(QtCore.Qt.gray, 2, QtCore.Qt.DotLine)
+                
+            
+            
+            
+            
             node_x  =   node.coordinates[0]
             node_y  =   node.coordinates[1]
              
@@ -77,6 +97,7 @@ class Draw_features(object):
         self.scene.addEllipse(self.env.get_selected_item().coordinates[0]-120,self.env.get_selected_item().coordinates[1]-150,290,290,pen)
         
         
+      
         
     
         

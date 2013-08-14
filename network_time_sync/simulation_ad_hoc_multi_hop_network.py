@@ -126,6 +126,7 @@ dialog_init =simulation_ad_hoc_multi_hop_network.dialog_init
 #Action_methods:
 #INIT the environment trough the dialog choices
 def init_env():
+   
     
     #set seed
     random.seed(simulation_ad_hoc_multi_hop_network.dialog_init.doubleSpinBox_seed.value())
@@ -138,6 +139,9 @@ def init_env():
         
     
     if (len(simulation_ad_hoc_multi_hop_network.buttons)>0):
+        
+        simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.stop()
+        
         simulation_ad_hoc_multi_hop_network.delete_buttons()
         
         #DISCONNECT old trigger and register at the end the new trigger with the new ENV-OBJECT!!!
@@ -155,6 +159,10 @@ def init_env():
         
         window.checkBox_beacon.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.change_selected_node_type)
         
+        window.pushButton_input_v.clicked.disconnect(simulation_ad_hoc_multi_hop_network.env.set_velocity_for_node)
+        
+        window.pushButton_stop_simulation.clicked.disconnect(simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.stop)  
+        window.pushButton_stop_simulation.clicked.disconnect(init_env)
         
          
         
@@ -391,7 +399,6 @@ def init_env():
     window.pushButton_pause_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.stop)   
     
     window.actionINIT.triggered.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.stop)  
-    
     window.actionINIT.triggered.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.initial_layer_creation)
         
     #simulation_ad_hoc_multi_hop_network.sync_algorithm.myOwnSignal.connect(simulation_ad_hoc_multi_hop_network.env.slot_render)    
@@ -399,6 +406,15 @@ def init_env():
     window.slider_simulation_speed.valueChanged.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.change_speed)
     
     window.checkBox_beacon.clicked.connect(simulation_ad_hoc_multi_hop_network.env.change_selected_node_type)
+    
+    
+    window.pushButton_input_v.clicked.connect(simulation_ad_hoc_multi_hop_network.env.set_velocity_for_node)
+    
+    
+    window.pushButton_stop_simulation.clicked.connect(simulation_ad_hoc_multi_hop_network.sync_algorithm.timerScreen.stop)  
+    window.pushButton_stop_simulation.clicked.connect(init_env)
+    
+    
 
          
  ######################################
@@ -474,7 +490,7 @@ dialog_init.buttonBox_dialog_init.accepted.connect(init_env)
 # window.graphicsView_sim.raise_()
 
 
-print(app)
+
 
 #print(window)
 window.show()

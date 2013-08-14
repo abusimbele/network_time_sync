@@ -41,6 +41,9 @@ class Node(Environment_object):
         
     def view_special_parameter(self):
         
+        
+
+        
         #print("2: ",self.env_ref.sync_algorithm)
         #self.env_ref.sync_algorithm.gateway_lost()
         self.env_ref.create_neighborhood_sorted_list_ALL()

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\Work\Desktop\window_main.ui'
 #
-# Created: Mon Aug 12 13:54:57 2013
+# Created: Wed Aug 14 11:06:39 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -16,30 +16,22 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 600)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-
-
-
-         #OLD:
-#         self.widget_simulation_window = QtGui.QWidget(self.centralwidget)
-#         self.widget_simulation_window.setGeometry(QtCore.QRect(0, 0, 600, 450))
-#         self.widget_simulation_window.setObjectName("widget_simulation_window")
-
-        #NEW:
+        
         self.widget_simulation_window = Widget_simulation_window(self.centralwidget)
         self.widget_simulation_window.setGeometry(QtCore.QRect(0, 0, 600, 450))
         self.widget_simulation_window.setObjectName("widget_simulation_window")
-
-        
-        
         
         self.graphicsView_sim = QtGui.QGraphicsView(self.widget_simulation_window)
         self.graphicsView_sim.setGeometry(QtCore.QRect(0, 0, 580, 450))
         self.graphicsView_sim.setObjectName("graphicsView_sim")
-        
-        
-        
-
-
+#         self.pushButton_robot_1 = QtGui.QPushButton(self.widget_simulation_window)
+#         self.pushButton_robot_1.setGeometry(QtCore.QRect(0, 0, 41, 41))
+#         self.pushButton_robot_1.setText("")
+#         icon = QtGui.QIcon()
+#         icon.addPixmap(QtGui.QPixmap(":/images/robot_beacon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+#         self.pushButton_robot_1.setIcon(icon)
+#         self.pushButton_robot_1.setIconSize(QtCore.QSize(30, 30))
+#         self.pushButton_robot_1.setObjectName("pushButton_robot_1")
         self.formLayoutWidget = QtGui.QWidget(self.centralwidget)
         self.formLayoutWidget.setGeometry(QtCore.QRect(590, 10, 201, 171))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
@@ -148,12 +140,6 @@ class Ui_MainWindow(object):
         self.gridLayout = QtGui.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
-        self.lineEdit_v_x = QtGui.QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_v_x.setObjectName("lineEdit_v_x")
-        self.gridLayout.addWidget(self.lineEdit_v_x, 1, 1, 1, 1)
-        self.lineEdit_v_y = QtGui.QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_v_y.setObjectName("lineEdit_v_y")
-        self.gridLayout.addWidget(self.lineEdit_v_y, 2, 1, 1, 1)
         self.label_txt_v_x_2 = QtGui.QLabel(self.gridLayoutWidget)
         self.label_txt_v_x_2.setObjectName("label_txt_v_x_2")
         self.gridLayout.addWidget(self.label_txt_v_x_2, 1, 0, 1, 1)
@@ -163,6 +149,12 @@ class Ui_MainWindow(object):
         self.pushButton_input_v = QtGui.QPushButton(self.gridLayoutWidget)
         self.pushButton_input_v.setObjectName("pushButton_input_v")
         self.gridLayout.addWidget(self.pushButton_input_v, 2, 2, 1, 1)
+        self.doubleSpinBox_input_vx = QtGui.QDoubleSpinBox(self.gridLayoutWidget)
+        self.doubleSpinBox_input_vx.setObjectName("doubleSpinBox_input_vx")
+        self.gridLayout.addWidget(self.doubleSpinBox_input_vx, 1, 1, 1, 1)
+        self.doubleSpinBox_input_vy = QtGui.QDoubleSpinBox(self.gridLayoutWidget)
+        self.doubleSpinBox_input_vy.setObjectName("doubleSpinBox_input_vy")
+        self.gridLayout.addWidget(self.doubleSpinBox_input_vy, 2, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))

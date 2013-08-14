@@ -262,7 +262,7 @@ class Node_environment(QObject):
         pushButton_robot.setObjectName("pushButton_robot_"+str(id))
         pushButton_robot.setVisible(True)
         #INSERT WITH layer -> 10000
-        node=Node(self.id,-1,False,MAX_TRANSMITTION_RANGE,(x,y),(0,0),0,pushButton_robot)
+        node=Node(id,-1,False,MAX_TRANSMITTION_RANGE,(x,y),(0,0),0,pushButton_robot)
         node.set_env_ref(self)
         node.set_window_ref(self.window)
         self.set_env_object(node)     
@@ -371,6 +371,40 @@ class Node_environment(QObject):
         self.selected_item.view_special_parameter()
         self.selected_item.set_items_to_neighborhood_sorted_list_view()
         self.features_obj.draw_trans_range()  
+        
+        
+    def set_velocity_for_node(self):
+        node=self.selected_item
+        v_x=self.window.doubleSpinBox_input_vx.value()
+        v_y=self.window.doubleSpinBox_input_vy.value()
+        
+         
+        self.selected_item.velocity_vector=(v_x,v_y)
+
+        self.selected_item.velocity_vector_length=(v_x**2+v_y**2)**0.5
+        
+        self.selected_item.view_parameter()
+        self.selected_item.view_special_parameter()
+        
+        
+            
+        
+    def connection_to_beacon(self,start_node):
+        
+        reached_nodes=[start_node]
+        node=start_node
+        
+        while(not node.is_beacon):
+            
+            node=node.gateway
+            
+            
+            if(reached_nodes.count(node)>0):
+                return False
+            else:
+                reached_nodes.append(node)
+        return True
+        
         
         
     
